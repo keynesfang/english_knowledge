@@ -1,0 +1,130 @@
+/**index.wxss**/
+.tip_title {
+  font-size: 13px;
+  padding: 0 20rpx;
+  position: fixed;
+  background-color: #000;
+  width: 100%;
+  color: #fff;
+  z-index: 9999;
+}
+text {
+  color: blue;
+}
+.article_list {
+  position: fixed;
+  top: 40rpx;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+}
+.news_bar {
+  position: relative;
+}
+audio {
+  width: 100%;
+}
+.audio_controll_bar {
+  width: 100%;
+  position: absolute;
+  top: 49px;
+  left: -18px;
+  z-index: 9999;
+}
+.declare {
+  margin-top: 25rpx;
+  font-size: 13px;
+  padding: 20rpx;
+}
+.article_content {
+  padding: 10rpx;
+  font-size: 14px;
+  border-bottom: 1px solid silver;
+}
+.article_content_chn {
+  color: blue;
+}
+.detail {
+  position: relative;
+}
+.detail_header {
+  z-index: 999;
+  position: fixed;
+  top: 67px;
+  left: 0;
+  width: 100%;
+  height: 200rpx;
+}
+.detail_query_result {
+  width: 100%;
+  font-size: 12px;
+  color: #fff;
+  background-color: silver;
+  height: 200rpx;
+  position: absolute;
+  top: 40rpx;
+  left: 0;
+}
+.detail_query_result_title {
+  margin: 10rpx;
+}
+.note_text {
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+.detail_query_result_explain {
+  margin: 10rpx;
+}
+.detail_toolbar1 {
+  position: absolute;
+  top: 140rpx;
+  left: 0;
+  width: 50%;
+  height: 60rpx;
+  text-align: center;
+}
+.detail_toolbar2 {
+  position: absolute;
+  top: 140rpx;
+  left: 50%;
+  width: 50%;
+  height: 60rpx;
+  text-align: center;
+}
+.detail_tool_icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0 50rpx;
+}
+.detail_article {
+  width: 650rpx;
+  position: absolute;
+  top: 350rpx;
+  left: 0;
+  padding: 20px 15px;
+  font-size: 15px;
+}
+.detail_article_section {
+  margin: 0 0 .8em;
+  margin-bottom: 1.5em;
+}
+.detail_original {
+  margin-bottom: .8em;
+}
+.detail_translate {
+  color: blue;
+}
+.detail_translate_btn {
+  position: fixed;
+  bottom: 120rpx;
+  right: 10rpx;
+  width: 32px;
+  height: 32px;
+}
+.detail_return_btn {
+  position: fixed;
+  bottom: 30rpx;
+  right: 10rpx;
+  width: 32px;
+  height: 32px;
+}
