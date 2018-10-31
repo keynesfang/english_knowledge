@@ -8,9 +8,9 @@
     <view class="view_model" bindtap="switch_view_model">{{view_model}}</view>
   </view>
   <!--视频-->
-  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" autoplay show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}"></video>
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" autoplay show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;'></video>
 </view>
-<scroll-view scroll-y class='subtitle_wrapper'>
+<scroll-view scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">
   <view class="sentence" wx:key="unique" wx:for="{{subtitle_content}}" wx:for-index="idx1" wx:for-item="sentence">
   <text>{{sentence.eng}}</text>
   </view>

@@ -6,26 +6,25 @@
 
 video {
   width: 750rpx;
-  height: 450rpx;
 }
 
 .control_bar {
   border-bottom: 1px solid silver;
-  height: 25px;
+  height: 30px;
   position: relative;
 }
 
 .video_control {
   position: absolute;
   left: 0;
-  top: -5px;
+  top: -3px;
   width: 35px;
   height: 35px;
 }
 
 .view_model {
   position: absolute;
-  top: 2px;
+  top: 4px;
   right: 10px;
   color: #fff;
   font-size: 14px;
@@ -33,7 +32,7 @@ video {
 }
 
 .subtitle_wrapper {
-  padding: 10px;
-  height: 100vh;
+  box-sizing: border-box;
+  padding: 5px 10px;
   font-size: 14px;
 }

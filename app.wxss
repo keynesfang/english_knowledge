@@ -1,11 +1,14 @@
 /**app.wxss**/
+page {
+ overflow-y: hidden;
+}
+
 .container {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 150rpx 0;
+  padding: 60px 0;
   box-sizing: border-box;
 } 
 
@@ -16,21 +19,19 @@
 }
 
 .userinfo-avatar {
-  width: 58rpx;
-  height: 58rpx;
-  margin: 20rpx;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   position: fixed;
-  top: 50rpx;
-  left: 20rpx;
+  top: 25px;
+  left: 10px;
   z-index: 999;
 }
 
 .web_title {
-  margin: 20rpx;
   position: fixed;
-  top: 50rpx;
-  left: 100rpx;
+  top: 30px;
+  font-size: 16px;
   z-index: 999;
   font-weight: bold;
 }
