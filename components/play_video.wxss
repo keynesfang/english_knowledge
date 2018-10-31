@@ -1,0 +1,39 @@
+/* pages/components/play_video.wxss */
+.video_wrapper {
+  background-color: #000;
+  width: 750rpx;
+}
+
+video {
+  width: 750rpx;
+  height: 450rpx;
+}
+
+.control_bar {
+  border-bottom: 1px solid silver;
+  height: 25px;
+  position: relative;
+}
+
+.video_control {
+  position: absolute;
+  left: 0;
+  top: -5px;
+  width: 35px;
+  height: 35px;
+}
+
+.view_model {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.subtitle_wrapper {
+  padding: 10px;
+  height: 100vh;
+  font-size: 14px;
+}

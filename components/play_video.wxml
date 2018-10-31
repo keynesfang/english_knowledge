@@ -1,0 +1,17 @@
+<!--pages/components/play_video.wxml-->
+<view class="video_wrapper">
+  <view id="control_bar" class="control_bar">
+    <!--视频播放-->
+    <image hidden="{{play_status == 'play' || view_model == '视频模式'}}" class='video_control' src="/image/play.png" bindtap="video_play_control"></image>
+    <image hidden="{{play_status == 'pause' || view_model == '视频模式'}}" class='video_control' src="/image/pause.png" bindtap="video_play_control"></image>
+    <!--阅读模式-->
+    <view class="view_model" bindtap="switch_view_model">{{view_model}}</view>
+  </view>
+  <!--视频-->
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" autoplay show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}"></video>
+</view>
+<scroll-view scroll-y class='subtitle_wrapper'>
+  <view class="sentence" wx:key="unique" wx:for="{{subtitle_content}}" wx:for-index="idx1" wx:for-item="sentence">
+  <text>{{sentence.eng}}</text>
+  </view>
+</scroll-view>

@@ -5,6 +5,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 150rpx 0;
   box-sizing: border-box;
 } 
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 58rpx;
+  height: 58rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  position: fixed;
+  top: 50rpx;
+  left: 20rpx;
+  z-index: 999;
+}
+
+.web_title {
+  margin: 20rpx;
+  position: fixed;
+  top: 50rpx;
+  left: 100rpx;
+  z-index: 999;
+  font-weight: bold;
+}
