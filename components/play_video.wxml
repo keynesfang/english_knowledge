@@ -4,7 +4,7 @@
     <!--视频播放-->
     <image hidden="{{play_status == 'play' || view_model == '视频模式'}}" class='video_control' src="/image/play.png" bindtap="video_play_control"></image>
     <image hidden="{{play_status == 'pause' || view_model == '视频模式'}}" class='video_control' src="/image/pause.png" bindtap="video_play_control"></image>
-    <text class="video_title">如何管理空闲时间</text>
+    <text class="video_title">{{videoTitle}}</text>
     <!--阅读模式-->
     <view class="view_model">
       <text class="view_model_read" bindtap="switch_view_model">{{view_model}}</text>

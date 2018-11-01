@@ -7,6 +7,6 @@
     </block>
   </view>
   <view class="web_title">英语与知识</view>
-  <play-video>
+  <play-video video-title="如何管理空闲时间">
   </play-video>
 </view>

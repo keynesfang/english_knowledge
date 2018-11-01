@@ -21,7 +21,10 @@ Component({
   },
 
   properties: {
-
+    videoTitle: {
+      type: String, 
+      value: "未知"
+    }
   },
 
   /**
