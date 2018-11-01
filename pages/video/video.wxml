@@ -1,0 +1,3 @@
+<!--pages/video/video.wxml-->
+<play-video video-title="如何管理空闲时间">
+</play-video>

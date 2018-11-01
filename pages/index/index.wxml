@@ -7,6 +7,49 @@
     </block>
   </view>
   <view class="web_title">英语与知识</view>
-  <play-video video-title="如何管理空闲时间">
-  </play-video>
+  <view class="title_bar">
+    <text>知识分类 </text><i class="fa fa-play"></i>
+    <text class="menu select_menu">时间管理</text>
+    <text class="menu">科技前沿</text>
+  </view>
 </view>
+<view class="video_list" style="height: {{video_list_height}}px;">
+  <swiper class="container" indicator-dots="{{indicatorDots}}" indicator-dots="{{indicatordots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{xinwen_list}}" wx:for-index="index">
+      <swiper-item class="vol-swiper-item" bindtap="onItemClick">
+        <view class="vol-meta-title">
+          <image class="icon_right" src="../../image/左.png"></image>
+          <text class="vol-number">来源：{{item.copyfrom}}</text>
+          <image class="icon_left" src="../../image/右.png"></image>
+        </view>
+        <view class="vol-card" data-id="{{item.id}}" catchtap="onPostTap">
+
+          <!--<view data-detail-href="{{item.detailHref}}" class="item">-->
+
+          <!--图片-->
+          <image class="vol-picture" src="{{item.images[0]}}" mode="aspectFill"></image>
+
+          <!--标题-->
+          <view class="vol-meta-title">
+            <text class="vol-number">{{item.title}}</text>
+          </view>
+
+          <!--时间-->
+          <view class="vol-meta-time">
+            <text>{{item.inputtime}}</text>
+          </view>
+
+          <!--描述信息-->
+          <view class="vol-content">
+            <text class="vol-content-text">{{item.description}}</text>
+          </view>
+
+          <!--</view>-->
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<loading hidden="{{hidden}}" bindchange="loadingChange">
+  加载中...
+</loading>
