@@ -4,14 +4,40 @@
     <!--视频播放-->
     <image hidden="{{play_status == 'play' || view_model == '视频模式'}}" class='video_control' src="/image/play.png" bindtap="video_play_control"></image>
     <image hidden="{{play_status == 'pause' || view_model == '视频模式'}}" class='video_control' src="/image/pause.png" bindtap="video_play_control"></image>
+    <text class="video_title">如何管理空闲时间</text>
     <!--阅读模式-->
-    <view class="view_model" bindtap="switch_view_model">{{view_model}}</view>
+    <view class="view_model">
+      <text class="view_model_read" bindtap="switch_view_model">{{view_model}}</text>
+      <text class="view_model_translate" bindtap="switch_subtitle_translate">中/英</text>
+    </view>
   </view>
   <!--视频-->
-  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" autoplay show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;'></video>
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;'></video>
 </view>
 <scroll-view scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">
-  <view class="sentence" wx:key="unique" wx:for="{{subtitle_content}}" wx:for-index="idx1" wx:for-item="sentence">
-  <text>{{sentence.eng}}</text>
+  <view class="sentence_package" wx:key="unique" wx:for="{{subtitle_eng_content}}" wx:for-index="idx1" wx:for-item="sentence">
+    <view class="play_sentence_package">
+      <image data-idx="{{idx1}}" bindtap="play_sentence" class="sentence_play" src="/image/play.png" hidden="{{view_model == '视频模式'}}"></image>
+    </view>
+    <view class="sentence_package_sub">
+      <query bindtap="query_eng_word" wx:key="unique" wx:for="{{sentence}}" wx:for-index="idx2" wx:for-item="word" data-word="{{word}}" data-idxx="{{idx1}}" data-idxy="{{idx2}}">
+        <text>{{word}} </text>
+      </query>
+      <view hidden="{{subtitle_translate_hide}}" class="subtitle_translate">{{subtitle_content[idx1].chn}}</view>
+    </view>
   </view>
 </scroll-view>
+
+<view class="explain_panel" hidden="{{explain_panel_hidden}}">
+  <image class="explain_close" src="/image/close.png" bindtap="close_panel"></image>
+  <view class="explain_title_bar" style="color: {{explain_title_color}};">
+    <text class="word_text">{{query_word_result.query}} </text>
+    <text>[{{query_word_result.basic.phonetic}}]</text>
+    <image style="" class="word_sound" src="/image/sound.png" bindtap='play_word_sound'></image>
+  </view>
+  <view class="word_explain" wx:key="unique" wx:for="{{query_word_result.basic.explains}}" wx:for-index="idx" wx:for-item="note">
+    {{note}}
+  </view>
+</view>
+
+<audio id="word_sound" src="{{word_sound_url}}" bindplay="word_wound_start" bindended="word_wound_end"></audio>

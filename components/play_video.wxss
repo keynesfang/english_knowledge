@@ -1,7 +1,17 @@
 /* pages/components/play_video.wxss */
+
 .video_wrapper {
   background-color: #000;
   width: 750rpx;
+}
+
+.video_title {
+  color: #fff;
+  margin-left: 37px;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+  line-height: 28px;
 }
 
 video {
@@ -23,16 +33,91 @@ video {
 }
 
 .view_model {
+  height: 30px;
   position: absolute;
-  top: 4px;
-  right: 10px;
+  top: 0;
+  right: 0;
   color: #fff;
   font-size: 14px;
-  border-radius: 5px;
+  padding:0;
+}
+
+.view_model_read {
+  padding: 4px 5px;
+  background-color: green;
+  height: 30px;
+  line-height: 28px;
+}
+
+.view_model_translate {
+  padding: 4px 5px;
+  background-color: blue;
+  height: 30px;
+  line-height: 28px;
 }
 
 .subtitle_wrapper {
   box-sizing: border-box;
+  font-size: 15px;
+}
+
+.sentence_package {
+  display: flex;
+  flex-direction: row;
+  background-color: silver;
+  border: 1px solid #fff;
+}
+
+.play_sentence_package {
+  padding: 5px;
+  display: inline-block;
+  height: 100%;
+}
+
+.sentence_play {
+  width: 24px;
+  height: 24px;
+}
+
+.sentence_package_sub {
   padding: 5px 10px;
+  display: inline-block;
+  border-left: 1px solid #fff;
+  line-height: 25px;
+}
+
+.subtitle_translate {
+  margin-top: 10px;
+}
+
+.explain_panel {
+  position: fixed;
+  bottom: 0;
+  background-color: #000;
+  color: #fff;
+  width: 100vw;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.explain_close {
+  width: 20px;
+  height: 20px;
+  float: right;
+}
+
+.explain_title_bar {
+  padding-bottom: 10px;
+  border-bottom: 1px solid silver;
+}
+
+.word_sound {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+.word_explain {
+  margin-top: 5px;
   font-size: 14px;
 }
