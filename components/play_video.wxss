@@ -1,17 +1,19 @@
 /* pages/components/play_video.wxss */
 
 .video_wrapper {
-  background-color: #000;
+  box-shadow: 0 -2px 10px #aaa;
   width: 750rpx;
 }
 
 .video_title {
-  color: #fff;
-  margin-left: 37px;
-  font-size: 14px;
+  margin-left: 32px;
+  font-size: 15px;
   font-weight: bold;
   height: 30px;
-  line-height: 28px;
+}
+
+.video_title_txt {
+  line-height: 30px;
 }
 
 video {
@@ -27,9 +29,9 @@ video {
 .video_control {
   position: absolute;
   left: 0;
-  top: -3px;
-  width: 35px;
-  height: 35px;
+  top: 0px;
+  width: 30px;
+  height: 30px;
 }
 
 .view_model {
@@ -39,12 +41,14 @@ video {
   right: 0;
   color: #fff;
   font-size: 14px;
-  padding:0;
+  padding: 0;
 }
 
 .view_model_read {
   padding: 4px 5px;
-  background-color: green;
+  margin-right: 5px;
+  box-shadow: 2px 2px 10px #aaa;
+  color: #000;
   height: 30px;
   line-height: 28px;
   border-bottom-left-radius: 5px;
@@ -53,7 +57,9 @@ video {
 
 .view_model_translate {
   padding: 4px 5px;
-  background-color: blue;
+  margin: 0 5px;
+  box-shadow: 2px 2px 10px #aaa;
+  color: #000;
   height: 30px;
   line-height: 28px;
   border-bottom-left-radius: 5px;
@@ -66,32 +72,42 @@ video {
 }
 
 .sentence_package {
-  display: flex;
-  flex-direction: row;
-  background-color: silver;
-  border: 1px solid #fff;
-}
-
-.play_sentence_package {
-  padding: 5px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 0 10px;
   display: inline-block;
-  height: 100%;
-}
-
-.sentence_play {
-  width: 24px;
-  height: 24px;
-}
-
-.sentence_package_sub {
-  padding: 5px 10px;
-  display: inline-block;
-  border-left: 1px solid #fff;
+  width: 750rpx;
   line-height: 25px;
 }
 
-.subtitle_translate {
+.play_package {
   margin-top: 10px;
+  position: relative;
+  width: 75px;
+  height: 15px;
+}
+
+.sentence_play {
+  width: 20px;
+  height: 20px;
+}
+
+.current_time {
+  position: absolute;
+  top: -2px;
+  left: 25px;
+  font-size: 15px;
+  display: inline-block;
+  color: #aaa;
+}
+
+.sentence_txt {
+  padding: 5px;
+  color: #666;
+}
+
+.sentence_txt.active {
+  color: #000;
 }
 
 .explain_panel {

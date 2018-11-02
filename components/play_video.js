@@ -1,29 +1,37 @@
 // pages/components/play_video.js
-var subtitles_file = require("../resource/subtitles.js");
 var translate = require("../resource/translate.js");
 
 Component({
+  last_play_time: 0,
+
   ready: function() {
+    this.subtitles_file = require("../resource/" + this.properties.videoSrc + ".js");
     this.VideoContext = wx.createVideoContext("current_video", this);
     this.audioCtx = wx.createAudioContext("word_sound", this);
     this.video_height = wx.getSystemInfoSync().windowWidth / 16 * 9;
     this.subtitles_height = wx.getSystemInfoSync().windowHeight - 76 - 30 - this.video_height;
     this.subtitle_eng_content = [];
-    for (let i = 0; i < subtitles_file.subtitles.length; i++) {
-      this.subtitle_eng_content.push(subtitles_file.subtitles[i].eng.split(" "));
+    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+      this.subtitle_eng_content.push(this.subtitles_file.subtitles[i].eng.split(" "));
     }
+    this.data.video_url = "https://iperson.top/function/english/video/ted/" + this.properties.videoSrc + ".mp4";
     this.setData({
       video_height: this.video_height,
       subtitles_height: this.subtitles_height,
-      subtitle_content: subtitles_file.subtitles,
-      subtitle_eng_content: this.subtitle_eng_content
+      subtitle_content: this.subtitles_file.subtitles,
+      subtitle_eng_content: this.subtitle_eng_content,
+      video_url: this.data.video_url
     });
   },
 
   properties: {
     videoTitle: {
-      type: String, 
+      type: String,
       value: "未知"
+    },
+    videoSrc: {
+      type: String,
+      value: ""
     }
   },
 
@@ -33,10 +41,10 @@ Component({
   data: {
     view_model: "阅读模式",
     play_status: "pause",
-    video_src: "https://iperson.top/function/english/video/ted/How_to_gain_control_of_your_free_time.mp4",
     explain_panel_hidden: true,
     subtitle_translate_hide: true,
-    explain_title_color: "orange"
+    explain_title_color: "orange",
+    current_index: 0
   },
 
   /**
@@ -74,11 +82,13 @@ Component({
 
     play_sentence: function(e) {
       var sentence_index = e.currentTarget.dataset["idx"];
-      this.VideoContext.seek(subtitles_file.subtitles[sentence_index].start);
+      this.data.current_index = sentence_index;
+      this.VideoContext.seek(this.subtitles_file.subtitles[sentence_index].start);
       this.VideoContext.play();
       this.data.play_status = "play";
       this.setData({
-        play_status: this.data.play_status
+        play_status: this.data.play_status,
+        current_index: this.data.current_index
       });
     },
 
@@ -146,6 +156,34 @@ Component({
       this.setData({
         explain_title_color: this.data.explain_title_color
       });
+    },
+
+    video_listen: function(e) {
+      // 发生视频往后拉的事件
+      if (this.last_play_time > e.detail.currentTime) {
+        this.reset_current_index(e.detail.currentTime);
+      }
+      this.last_play_time = e.detail.currentTime;
+      if (e.detail.currentTime > this.data.subtitle_content[this.data.current_index + 1].start) {
+        this.data.current_index++;
+      }
+      this.setData({
+        current_index: this.data.current_index
+      });
+    },
+
+    reset_current_index: function(cur_time) {
+      if (cur_time <= this.data.subtitle_content[0].start) {
+        this.data.current_index = 0;
+        return;
+      }
+
+      for (let i = 0; i < this.data.subtitle_content.length; i++) {
+        if (cur_time > this.data.subtitle_content[i].start) {
+          this.data.current_index = i;
+          return;
+        }
+      }
     }
   }
 })

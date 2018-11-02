@@ -4,7 +4,9 @@
     <!--视频播放-->
     <image hidden="{{play_status == 'play' || view_model == '视频模式'}}" class='video_control' src="/image/play.png" bindtap="video_play_control"></image>
     <image hidden="{{play_status == 'pause' || view_model == '视频模式'}}" class='video_control' src="/image/pause.png" bindtap="video_play_control"></image>
-    <text class="video_title">{{videoTitle}}</text>
+    <view class="video_title">
+      <text class="video_title_txt">{{videoTitle}}</text>
+    </view>
     <!--阅读模式-->
     <view class="view_model">
       <text class="view_model_read" bindtap="switch_view_model">{{view_model}}</text>
@@ -12,19 +14,20 @@
     </view>
   </view>
   <!--视频-->
-  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_src}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;'></video>
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_url}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;' bindtimeupdate="video_listen"></video>
 </view>
 <scroll-view scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">
   <view class="sentence_package" wx:key="unique" wx:for="{{subtitle_eng_content}}" wx:for-index="idx1" wx:for-item="sentence">
-    <view class="play_sentence_package">
+    <view class="play_package">
       <image data-idx="{{idx1}}" bindtap="play_sentence" class="sentence_play" src="/image/play.png" hidden="{{view_model == '视频模式'}}"></image>
+      <view class="current_time"> {{subtitle_content[idx1].time}}</view>
     </view>
-    <view class="sentence_package_sub">
+    <view class="sentence_txt {{current_index == idx1 ?'active':''}}">
       <query bindtap="query_eng_word" wx:key="unique" wx:for="{{sentence}}" wx:for-index="idx2" wx:for-item="word" data-word="{{word}}" data-idxx="{{idx1}}" data-idxy="{{idx2}}">
         <text>{{word}} </text>
       </query>
-      <view hidden="{{subtitle_translate_hide}}" class="subtitle_translate">{{subtitle_content[idx1].chn}}</view>
     </view>
+    <view hidden="{{subtitle_translate_hide}}" class="subtitle_translate sentence_txt {{current_index == idx1 ?'active':''}}">{{subtitle_content[idx1].chn}}</view>
   </view>
 </scroll-view>
 

@@ -1,3 +1,7 @@
 <!--pages/video/video.wxml-->
-<play-video video-title="如何管理空闲时间">
-</play-video>
+<view class="container">
+  <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
+  <view class="web_title">I <i class="fa fa-play"></i> 看视频</view>
+  <play-video video-title="{{video.title}}" video-src="{{video.file}}">
+  </play-video>
+</view>

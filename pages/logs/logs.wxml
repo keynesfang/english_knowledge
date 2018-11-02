@@ -1,6 +1,7 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+<view class="container">
+  <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
+  <view class="web_title">I <i class="fa fa-heart"></i> 看视频</view>
+  <play-video video-title="我爱看视频" video-src="Your_fingerprints_reveal_more_than_you_think">
+  </play-video>
 </view>

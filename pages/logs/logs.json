@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "查看启动日志"
+  "usingComponents": {
+    "play-video": "/components/play_video"
+  }
 }
