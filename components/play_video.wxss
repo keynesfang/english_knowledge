@@ -6,7 +6,7 @@
 }
 
 .video_title {
-  margin-left: 32px;
+  display: inline-block;
   font-size: 15px;
   font-weight: bold;
   height: 30px;
@@ -14,6 +14,7 @@
 
 .video_title_txt {
   line-height: 30px;
+  margin-left: 5px;
 }
 
 video {
@@ -27,9 +28,7 @@ video {
 }
 
 .video_control {
-  position: absolute;
-  left: 0;
-  top: 0px;
+  float: left;
   width: 30px;
   height: 30px;
 }
@@ -88,20 +87,24 @@ video {
 }
 
 .sentence_play {
+  float: left;
   width: 20px;
   height: 20px;
 }
 
+.sentence_play.active {
+  border: 1px solid #000;
+}
+
 .current_time {
-  position: absolute;
-  top: -2px;
-  left: 25px;
+  margin-left: 5px;
   font-size: 15px;
   display: inline-block;
   color: #aaa;
 }
 
 .sentence_txt {
+  margin-top: 5px;
   padding: 5px;
   color: #666;
 }
