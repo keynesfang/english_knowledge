@@ -1,4 +1,5 @@
 // pages/components/play_video.js
+var util = require("../utils/util.js");
 var translate = require("../resource/translate.js");
 
 Component({
@@ -134,7 +135,6 @@ Component({
       var that = this;
       translate.request(this.data.query_word, function(res) {
         that.data.query_word_result = res.data;
-        console.log(res.data);
         that.setData({
           query_word_result: res.data,
           explain_panel_hidden: false,
@@ -219,6 +219,24 @@ Component({
           return;
         }
       }
+    },
+
+    add_word: function(e) {
+      var today = util.formatYMD(new Date());
+      wx.setStorage({
+        key: e.currentTarget.dataset.word,
+        data: {
+          date: today,
+          src_ttl: this.properties.videoTitle,
+          scr_name: this.properties.videoSrc
+        }
+      })
+    }, 
+
+    open_word_book: function(e) {
+      wx.navigateTo({
+        url: '/pages/word/word'
+      });
     }
   }
 })

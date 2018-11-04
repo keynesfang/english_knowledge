@@ -1,0 +1,10 @@
+<!--pages/word/word.wxml-->
+<view class="container">
+  <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
+  <view class="web_title">I
+    <i class="fa fa-book"></i> 的生词</view>
+
+  <view class="word_list" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
+    {{word}}
+  </view>
+</view>

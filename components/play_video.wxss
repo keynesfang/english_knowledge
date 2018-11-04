@@ -128,18 +128,42 @@ video {
   float: right;
 }
 
-.explain_title_bar {
-  padding-bottom: 10px;
-  border-bottom: 1px solid silver;
-}
-
 .word_sound {
   width: 25px;
   height: 25px;
   margin-left: 5px;
 }
 
+.word_add {
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-right: 5px;
+}
+
+.word_book {
+  width: 25px;
+  height: 25px;
+  float: right;
+}
+
+.word_title {
+  position: absolute;
+  top: 3px;
+  left: 45px;
+}
+
+.word_text {
+  font-size: 15px;
+}
+
+.all_explain {
+  margin-top: 25px;
+}
+
 .word_explain {
   margin-top: 5px;
+  margin-left: 10px;
   font-size: 14px;
+  display: inline-block;
 }
