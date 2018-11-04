@@ -14,15 +14,15 @@
     </view>
   </view>
   <!--视频-->
-  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_url}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}" style='height: {{video_height}}px;' bindtimeupdate="video_listen"></video>
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_url}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" style='height: {{video_height}}px;' bindtimeupdate="video_listen" bindplay="video_play_event" bindpause="video_pause_event"></video>
 </view>
-<scroll-view scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">
-  <view class="sentence_package" wx:key="unique" wx:for="{{subtitle_eng_content}}" wx:for-index="idx1" wx:for-item="sentence">
+<scroll-view id="subtitle-view" scroll-top="{{subtitle_scroll_top}}" scroll-height-animation="{{true}}" scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">
+  <view id="view{{idx1}}" class="sentence_package {{current_index == idx1 || play_status == 'pause' ?'active':''}}" wx:key="unique" wx:for="{{subtitle_eng_content}}" wx:for-index="idx1" wx:for-item="sentence">
     <view class="play_package">
       <image data-idx="{{idx1}}" bindtap="play_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/play.png" hidden="{{view_model == '视频模式'}}"></image>
       <view class="current_time"> {{subtitle_content[idx1].time}}</view>
     </view>
-    <view class="sentence_txt {{current_index == idx1 ?'active':''}}">
+    <view class="sentence_txt">
       <query bindtap="query_eng_word" wx:key="unique" wx:for="{{sentence}}" wx:for-index="idx2" wx:for-item="word" data-word="{{word}}" data-idxx="{{idx1}}" data-idxy="{{idx2}}">
         <text>{{word}} </text>
       </query>

@@ -74,9 +74,13 @@ video {
   box-sizing: border-box;
   justify-content: space-between;
   padding: 0 10px;
-  display: inline-block;
   width: 750rpx;
   line-height: 25px;
+  display: none;
+}
+
+.sentence_package.active {
+  display: block;
 }
 
 .play_package {
@@ -106,11 +110,6 @@ video {
 .sentence_txt {
   margin-top: 5px;
   padding: 5px;
-  color: #666;
-}
-
-.sentence_txt.active {
-  color: #000;
 }
 
 .explain_panel {

@@ -22,6 +22,10 @@ Component({
       subtitle_eng_content: this.subtitle_eng_content,
       video_url: this.data.video_url
     });
+
+    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+      this.set_sentence_view_pos_arr(i);
+    }
   },
 
   properties: {
@@ -44,7 +48,9 @@ Component({
     explain_panel_hidden: true,
     subtitle_translate_hide: true,
     explain_title_color: "orange",
-    current_index: 0
+    current_index: 0,
+    subtitle_scroll_top: 0,
+    sentence_view_pos_arr: []
   },
 
   /**
@@ -64,6 +70,32 @@ Component({
         view_model: this.data.view_model,
         play_status: this.data.play_status,
         subtitles_height: temp_subtitles_height
+      });
+    },
+
+    set_sentence_view_pos_arr: function (idx) {
+      var that = this;
+      let id_mark = "#view" + idx;
+      const query = wx.createSelectorQuery().in(this)
+      query.select(id_mark).boundingClientRect(function (res) {
+        that.data.sentence_view_pos_arr.push(res.top);
+      }).exec()
+    },
+
+    video_play_event: function(e) {
+      this.data.play_status = "play";
+      this.setData({
+        play_status: this.data.play_status,
+        subtitle_scroll_top: 0
+      });
+    },
+
+    video_pause_event: function(e) {
+      this.data.play_status = "pause";
+      let current_sentence_scroll_height = this.data.sentence_view_pos_arr[this.data.current_index] - this.data.sentence_view_pos_arr[0];
+      this.setData({
+        play_status: this.data.play_status,
+        subtitle_scroll_top: current_sentence_scroll_height
       });
     },
 
@@ -164,6 +196,9 @@ Component({
         this.reset_current_index(e.detail.currentTime);
       }
       this.last_play_time = e.detail.currentTime;
+      if (this.data.current_index + 1 >= this.subtitles_file.subtitles.length) {
+        return;
+      }
       if (e.detail.currentTime > this.data.subtitle_content[this.data.current_index + 1].start) {
         this.data.current_index++;
       }
