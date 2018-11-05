@@ -74,11 +74,11 @@ Component({
       });
     },
 
-    set_sentence_view_pos_arr: function (idx) {
+    set_sentence_view_pos_arr: function(idx) {
       var that = this;
       let id_mark = "#view" + idx;
       const query = wx.createSelectorQuery().in(this)
-      query.select(id_mark).boundingClientRect(function (res) {
+      query.select(id_mark).boundingClientRect(function(res) {
         that.data.sentence_view_pos_arr.push(res.top);
       }).exec()
     },
@@ -191,8 +191,8 @@ Component({
     },
 
     video_listen: function(e) {
-      // 发生视频往后拉的事件
-      if (this.last_play_time > e.detail.currentTime) {
+      // 发生滚动条拉动（根据时间差来判断）
+      if (this.last_play_time > e.detail.currentTime || (e.detail.currentTime - this.last_play_time) > 3) {
         this.reset_current_index(e.detail.currentTime);
       }
       this.last_play_time = e.detail.currentTime;
@@ -213,7 +213,7 @@ Component({
         return;
       }
 
-      for (let i = 0; i < this.data.subtitle_content.length; i++) {
+      for (let i = this.data.subtitle_content.length - 1; i > 0; i--) {
         if (cur_time > this.data.subtitle_content[i].start) {
           this.data.current_index = i;
           return;
@@ -231,7 +231,7 @@ Component({
           scr_name: this.properties.videoSrc
         }
       })
-    }, 
+    },
 
     open_word_book: function(e) {
       wx.navigateTo({
