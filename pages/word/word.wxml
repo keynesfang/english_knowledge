@@ -4,7 +4,21 @@
   <view class="web_title">I
     <i class="fa fa-book"></i> 的生词</view>
 
-  <view class="word_list" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
-    {{word}}
+  <view class="note">
+    <i class="fa fa-info-circle fa-2x info"></i>
+    <text class="info-text">生词存储在当前设备中，更换设备或清空缓存后，生词随之清空！</text>
+  </view>
+
+  <view class="word_list">
+    <view class="null">
+      <image class="null_box" hidden="{{word_list.length != 0}}" src="/image/null.png"></image>
+    </view>
+    <view class="word_package" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
+      <i class="fa {{click_word_index == idx ?'fa-volume-up':'fa-volume-off'}}" bindtap="play_word_sound" data-word="{{word}}" data-wordidx="{{idx}}"></i>
+      <text class="word" bindtap="go_to_source" data-word="{{word}}">{{word}}</text>
+      <i bindtap="delete_word" class="fa fa-close delete" data-word="{{word}}"></i>
+    </view>
   </view>
 </view>
+
+<audio id="word_sound" src="{{word_sound_url}}" bindended="word_sound_end"></audio>

@@ -95,7 +95,7 @@ Page({
 
   play_video: function(e) {
     wx.navigateTo({
-      url: '/pages/video/video?video_type=' + e.currentTarget.dataset.tvideo + '&video_index=' + e.currentTarget.dataset.ivideo
+      url: '/pages/video/video?video_title=' + e.currentTarget.dataset.title + '&video_filename=' + e.currentTarget.dataset.filename
     });
   }
 })

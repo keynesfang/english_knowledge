@@ -49,4 +49,4 @@
   </view>
 </view>
 
-<audio id="word_sound" src="{{word_sound_url}}" bindplay="word_wound_start" bindended="word_wound_end"></audio>
+<audio id="word_sound" src="{{word_sound_url}}" bindplay="word_sound_start" bindended="word_sound_end"></audio>

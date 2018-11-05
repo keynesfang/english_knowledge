@@ -17,7 +17,7 @@
   <swiper-item wx:for="{{navData}}" wx:for-item="tabItem" wx:for-index="idx" wx:key="idx" class="tab-content">
     <view class="video_item" wx:key="unique" wx:for="{{videos[tabItem.text]}}" wx:for-index="idx_video" wx:for-item="video_info">
       <view class="video_play_icon fa fa-youtube-play fa-2x"></view>
-      <view class="shade" data-tvideo="{{tabItem.text}}" data-ivideo="{{video_info.index}}" bindtap="play_video"></view>
+      <view class="shade" data-tvideo="{{tabItem.text}}" data-ivideo="{{video_info.index}}" bindtap="play_video" data-title="{{video_info.title}}" data-filename="{{video_info.file}}"></view>
       <image class="video_poster" src="/image/{{video_info.file}}.png"></image>
       <text class="video_title">{{video_info.title}}</text>
       <text class="video_title eng">{{video_info.name}}</text>

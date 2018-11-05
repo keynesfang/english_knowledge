@@ -1,5 +1,4 @@
 // pages/video/video.js
-var video_list = require("../../resource/video_list.js");
 //获取应用实例
 const app = getApp()
 
@@ -17,7 +16,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      video: video_list.videos[options.video_type][options.video_index]
+      video_title: options.video_title,
+      video_filename: options.video_filename
     });
   },
 

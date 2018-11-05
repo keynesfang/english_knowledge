@@ -2,6 +2,6 @@
 <view class="container">
   <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
   <view class="web_title">I <i class="fa fa-play"></i> 看视频</view>
-  <play-video video-title="{{video.title}}" video-src="{{video.file}}">
+  <play-video video-title="{{video_title}}" video-src="{{video_filename}}">
   </play-video>
 </view>

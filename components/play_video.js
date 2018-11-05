@@ -176,14 +176,14 @@ Component({
       });
     },
 
-    word_wound_start: function(e) {
+    word_sound_start: function(e) {
       this.data.explain_title_color = "#fff";
       this.setData({
         explain_title_color: this.data.explain_title_color
       });
     },
 
-    word_wound_end: function(e) {
+    word_sound_end: function(e) {
       this.data.explain_title_color = "orange";
       this.setData({
         explain_title_color: this.data.explain_title_color
@@ -227,8 +227,8 @@ Component({
         key: e.currentTarget.dataset.word,
         data: {
           date: today,
-          src_ttl: this.properties.videoTitle,
-          scr_name: this.properties.videoSrc
+          title: this.properties.videoTitle,
+          filename: this.properties.videoSrc
         }
       })
     },
