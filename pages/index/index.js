@@ -94,6 +94,25 @@ Page({
   },
 
   play_video: function(e) {
+    // wx.getNetworkType({
+    //   success(res) {
+    //     const networkType = res.networkType;
+    //     console.log(networkType);
+    //     if (networkType == "wifi") {
+    //       wx.showModal({
+    //         title: '提示',
+    //         content: '正在使用流量，是否继续播放！',
+    //         success(res) {
+    //           if (res.confirm) {
+    //             console.log('用户点击确定')
+    //           } else if (res.cancel) {
+    //             console.log('用户点击取消')
+    //           }
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
     wx.navigateTo({
       url: '/pages/video/video?video_title=' + e.currentTarget.dataset.title + '&video_filename=' + e.currentTarget.dataset.filename
     });

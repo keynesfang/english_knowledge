@@ -149,6 +149,13 @@ Component({
     },
 
     query_eng_word: function(e) {
+      wx.showToast({
+        title: '查词中',
+        icon: 'success',
+        image: "/image/query.png",
+        duration: 1000,
+        mask: true
+      })
       var idx1 = e.currentTarget.dataset.idxx;
       var idx2 = e.currentTarget.dataset.idxy;
       this.data.select_word_pos = [idx1, idx2];
