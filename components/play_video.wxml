@@ -28,7 +28,7 @@
       
       <view class="current_time"> {{subtitle_content[idx1].time}}</view>
     </view>
-    <view class="sentence_txt_eng">
+    <view class="sentence_txt_eng {{current_index == idx1 || play_status == 'pause' ?'active':''}}">
       <query bindtap="query_eng_word" wx:key="unique" wx:for="{{sentence}}" wx:for-index="idx2" wx:for-item="word" data-word="{{word}}" data-idxx="{{idx1}}" data-idxy="{{idx2}}">
         <text>{{word}} </text>
       </query>

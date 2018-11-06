@@ -112,6 +112,10 @@ video {
   padding: 5px;
 }
 
+.sentence_txt_eng.active {
+  margin-top: 20px;
+}
+
 .sentence_txt_chn {
   margin-top: 0;
   padding: 5px;
