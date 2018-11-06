@@ -148,6 +148,28 @@ Component({
       });
     },
 
+    play_goback: function(e) {
+      var set_time = this.last_play_time - 5;
+      if (set_time > 0) {
+        this.last_play_time = set_time;
+        this.reset_current_index(set_time);
+        this.VideoContext.seek(set_time);
+        this.VideoContext.play();
+        this.data.play_status = "play";
+      }
+    },
+
+    play_forward: function(e) {
+      var set_time = this.last_play_time + 5;
+      if (set_time > 0) {
+        this.last_play_time = set_time;
+        this.reset_current_index(set_time);
+        this.VideoContext.seek(set_time);
+        this.VideoContext.play();
+        this.data.play_status = "play";
+      }
+    },
+
     query_eng_word: function(e) {
       wx.showToast({
         title: '查词中',
@@ -241,8 +263,7 @@ Component({
         this.data.current_index = 0;
         return;
       }
-
-      for (let i = this.data.subtitle_content.length - 1; i > 0; i--) {
+      for (let i = this.data.subtitle_content.length - 1; i >= 0; i--) {
         if (cur_time > this.data.subtitle_content[i].start) {
           this.data.current_index = i;
           return;
