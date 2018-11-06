@@ -21,7 +21,8 @@ Component({
       subtitles_height: this.subtitles_height,
       subtitle_content: this.subtitles_file.subtitles,
       subtitle_eng_content: this.subtitle_eng_content,
-      video_url: this.data.video_url
+      video_url: this.data.video_url,
+      subtitle_end_index: this.subtitle_eng_content.length - 1
     });
 
     for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
@@ -125,6 +126,28 @@ Component({
       });
     },
 
+    next_sentence: function (e) {
+      this.data.current_index = e.currentTarget.dataset["idx"] + 1;
+      this.VideoContext.seek(this.subtitles_file.subtitles[this.data.current_index].start);
+      this.VideoContext.play();
+      this.data.play_status = "play";
+      this.setData({
+        play_status: this.data.play_status,
+        current_index: this.data.current_index
+      });
+    },
+
+    prev_sentence: function (e) {
+      this.data.current_index = e.currentTarget.dataset["idx"] - 1;
+      this.VideoContext.seek(this.subtitles_file.subtitles[this.data.current_index].start);
+      this.VideoContext.play();
+      this.data.play_status = "play";
+      this.setData({
+        play_status: this.data.play_status,
+        current_index: this.data.current_index
+      });
+    },
+
     query_eng_word: function(e) {
       var idx1 = e.currentTarget.dataset.idxx;
       var idx2 = e.currentTarget.dataset.idxy;
@@ -134,7 +157,6 @@ Component({
       this.data.word_sound_url = "https://tts.yeshj.com/s/" + this.data.query_word;
       var that = this;
       translate.request(this.data.query_word, function(res) {
-        that.data.query_word_result = res.data;
         that.setData({
           query_word_result: res.data,
           explain_panel_hidden: false,

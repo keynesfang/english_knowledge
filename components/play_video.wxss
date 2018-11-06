@@ -56,7 +56,7 @@ video {
 
 .view_model_translate {
   padding: 4px 5px;
-  margin: 0 5px;
+  margin: 0 8px;
   box-shadow: 2px 2px 10px #aaa;
   color: #000;
   height: 30px;
@@ -86,14 +86,14 @@ video {
 .play_package {
   margin-top: 10px;
   position: relative;
-  width: 75px;
+  width: 275px;
   height: 15px;
 }
 
 .sentence_play {
   float: left;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .sentence_play.active {
@@ -107,8 +107,13 @@ video {
   color: #aaa;
 }
 
-.sentence_txt {
-  margin-top: 5px;
+.sentence_txt_eng {
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.sentence_txt_chn {
+  margin-top: 0;
   padding: 5px;
 }
 

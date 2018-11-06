@@ -1,11 +1,16 @@
 // pages/word/word.js
+var translate = require("../../resource/translate.js");
 Page({
+
+  cur_word: "",
 
   /**
    * 页面的初始数据
    */
   data: {
-    volume_type: "off"
+    volume_type: "off",
+    is_word_querying: false,
+    is_clear_all: false
   },
 
   /**
@@ -24,6 +29,10 @@ Page({
 
   onReady: function() {
     this.audioCtx = wx.createAudioContext("word_sound");
+    let list_height = wx.getSystemInfoSync().windowHeight - 130
+    this.setData({
+      list_height: list_height
+    });
   },
 
   /**
@@ -46,11 +55,8 @@ Page({
   },
 
   play_word_sound: function(e) {
-    this.data.word_sound_url = "https://tts.yeshj.com/s/" + e.currentTarget.dataset.word;
-    this.data.click_word_index = e.currentTarget.dataset.wordidx;
     this.setData({
-      word_sound_url: this.data.word_sound_url,
-      click_word_index: this.data.click_word_index
+      volume_type: "up"
     });
     this.audioCtx.play();
   },
@@ -58,13 +64,13 @@ Page({
   word_sound_end: function(e) {
     this.setData({
       word_sound_url: "",
-      click_word_index: -1
+      volume_type: "off"
     });
   },
 
   go_to_source: function(e) {
     try {
-      var value = wx.getStorageSync(e.currentTarget.dataset.word)
+      var value = wx.getStorageSync(this.cur_word);
       if (value) {
         wx.navigateTo({
           url: '/pages/video/video?video_title=' + value.title + '&video_filename=' + value.filename
@@ -75,9 +81,61 @@ Page({
     }
   },
 
+  show_explain: function(e) {
+    this.cur_word = e.currentTarget.dataset.word;
+    this.data.word_sound_url = "https://tts.yeshj.com/s/" + this.cur_word;
+    var that = this;
+    translate.request(this.cur_word, function(res) {
+      console.log(res.data)
+      that.data.query_word_result = res.data;
+      that.setData({
+        is_word_querying: true,
+        query_word_result: res.data,
+        word_sound_url: that.data.word_sound_url
+      });
+    });
+  },
+
+  close_explain: function(e) {
+    this.setData({
+      is_word_querying: false
+    });
+  },
+
   delete_word: function(e) {
     try {
-      wx.removeStorageSync(e.currentTarget.dataset.word)
+      let word_index = e.currentTarget.dataset.wordidx;
+      this.data.word_list.splice(word_index, 1);
+      wx.removeStorageSync(e.currentTarget.dataset.word);
+      this.setData({
+        word_list: this.data.word_list
+      });
+    } catch (e) {
+      // Do something when catch error
+    }
+  },
+
+  clear_all: function(e) {
+    this.setData({
+      is_clear_all: true
+    });
+
+
+  },
+
+  clear_all_no: function(e) {
+    this.setData({
+      is_clear_all: false
+    });
+  },
+
+  clear_all_yes: function(e) {
+    try {
+      wx.clearStorageSync();
+      this.setData({
+        word_list: [],
+        is_clear_all: false
+      });
     } catch (e) {
       // Do something when catch error
     }

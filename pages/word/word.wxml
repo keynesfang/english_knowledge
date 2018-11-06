@@ -8,20 +8,58 @@
     <i class="fa fa-info-circle fa-2x info"></i>
     <text class="info-text">生词存储在当前设备中，更换设备或清空缓存后，生词随之清空！</text>
   </view>
-  <view class="word_list">
+  
+  <scroll-view scroll-y class="word_list" hidden="{{is_word_querying}}" style="height: {{list_height}}px;">
     <view class="null">
       <image class="null_box" hidden="{{word_list.length != 0}}" src="/image/null.png"></image>
     </view>
     <view class="word_package" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
-      <i class="fa {{click_word_index == idx ?'fa-volume-up':'fa-volume-off'}}" bindtap="play_word_sound" data-word="{{word}}" data-wordidx="{{idx}}"></i>
-      <text class="word" bindtap="go_to_source" data-word="{{word}}">{{word}}</text>
-      <i bindtap="delete_word" class="fa fa-close delete" data-word="{{word}}"></i>
+      <text class="word" bindtap="show_explain" data-word="{{word}}">{{word}}</text>
+      <i bindtap="delete_word" class="fa fa-close delete" data-word="{{word}}" data-wordidx="{{idx}}"></i>
+    </view>
+    <view class="clear" bindtap="clear_all">
+      <i class='fa fa-trash'></i>
+    </view>
+
+    <view class="clear_confirm" hidden="{{!is_clear_all}}">
+      <view class="clear_tip">
+        <i class='fa fa-trash'></i>
+        <text> 确认清空生词表吗？</text>
+      </view>
+      <view>
+        <view class="clear_btn clear_btn_left" bindtap="clear_all_yes">清 空</view>
+        <view class="clear_btn" bindtap="clear_all_no">算 了</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="explain" hidden="{{!is_word_querying}}">
+    <view class="reply" bindtap="close_explain">
+      <i class='fa fa-reply'></i>
+    </view>
+    <view class="source" bindtap="go_to_source">
+      原文
+    </view>
+    <view class="word_title">
+      <text class="word_text big_title">{{query_word_result.query}} </text>
+      <text hidden="{{!query_word_result.basic.phonetic}}">[{{query_word_result.basic.phonetic}}]</text>
+      <i class="fa fa-volume-{{volume_type}} sound_icon fa-2x" bindtap="play_word_sound" data-word="{{word}}" data-wordidx="{{idx}}"></i>
+    </view>
+    <view class="explains">
+      <view class="abc">基本解释</view>
+      <view class="word_explain" wx:key="unique" wx:for="{{query_word_result.basic.explains}}" wx:for-index="idx" wx:for-item="note">
+        <text class="detail">{{note}}</text>
+      </view>
+
+      <view class="abc web">网络解释</view>
+      <view class="word_explain" wx:key="unique" wx:for="{{query_word_result.web}}" wx:for-index="idx1" wx:for-item="note">
+        <view class="word_text">{{note.key}}</view>
+        <block class="word_explain" wx:key="unique" wx:for="{{note.value}}" wx:for-index="idx2" wx:for-item="detail">
+          <text class="detail">{{detail}} </text>
+        </block>
+      </view>
     </view>
   </view>
-</view>
-
-<view class="clear">
-  <i class='fa fa-trash'></i>
 </view>
 
 <audio id="word_sound" src="{{word_sound_url}}" bindended="word_sound_end"></audio>
