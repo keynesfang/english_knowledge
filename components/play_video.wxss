@@ -113,7 +113,7 @@ video {
 }
 
 .sentence_txt_eng.active {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .sentence_txt_chn {
