@@ -21,7 +21,7 @@
   <view id="view{{idx1}}" class="sentence_package {{current_index == idx1 || play_status == 'pause' ?'active':''}}" wx:key="unique" wx:for="{{subtitle_eng_content}}" wx:for-index="idx1" wx:for-item="sentence">
     <view class="play_package">
       <image data-idx="{{idx1}}" bindtap="play_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/replay.png" hidden="{{view_model == '视频模式'}}"></image>
-      <image data-idx="{{idx1}}" bindtap="play_goback" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/back.png" hidden="{{view_forward == '视频模式' || current_index != idx1}}"></image>
+      <image data-idx="{{idx1}}" bindtap="play_goback" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/back.png" hidden="{{view_model == '视频模式' || current_index != idx1}}"></image>
       <image data-idx="{{idx1}}" bindtap="play_forward" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/forw.png" hidden="{{view_model == '视频模式' || current_index != idx1}}"></image>
       <image data-idx="{{idx1}}" bindtap="prev_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/prev.png" hidden="{{view_model == '视频模式' || current_index != idx1 || current_index == 0}}"></image>
       <image data-idx="{{idx1}}" bindtap="next_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/next.png" hidden="{{view_model == '视频模式' || current_index != idx1 || current_index == subtitle_end_index}}"></image>
