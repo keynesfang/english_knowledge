@@ -6,7 +6,8 @@ var videos = {
     { "index": "0", "title": "指纹泄露了你的信息", "name": "Your fingerprints reveal more than you think", "time": "10:06", "file": "Your_fingerprints_reveal_more_than_you_think" }
   ],
   "教育理念": [
-    { "index": "0", "title": "每个孩子都是冠军", "name": "Every kid needs a champion", "time": "07:44", "file": "Every_kid_needs_a_champion" }
+    { "index": "0", "title": "每个孩子都是冠军", "name": "Every kid needs a champion", "time": "07:44", "file": "Every_kid_needs_a_champion" },
+    { "index": "1", "title": "激发学习的3条规则", "name": "3 rules to spark learning", "time": "06:29", "file": "3_rules_to_spark_learning" }
   ]
 };
 
