@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/word/word",
+    "pages/logs/logs",
     "pages/video/video"
   ],
   "window": {

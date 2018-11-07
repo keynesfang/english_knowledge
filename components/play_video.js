@@ -273,6 +273,12 @@ Component({
 
     add_word: function(e) {
       var today = util.formatYMD(new Date());
+      wx.showToast({
+        title: '已添加',
+        icon: 'success',
+        image: "/image/book.png",
+        duration: 500
+      })
       wx.setStorage({
         key: e.currentTarget.dataset.word,
         data: {

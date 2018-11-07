@@ -2,7 +2,7 @@
 <view class="container">
   <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
   <view class="web_title">I
-    <i class="fa fa-book"></i> 的生词</view>
+    <i class="fa fa-book"></i> 背生词</view>
 
   <view class="note">
     <i class="fa fa-info-circle fa-2x info"></i>
@@ -13,11 +13,11 @@
     <view class="null">
       <image class="null_box" hidden="{{word_list.length != 0}}" src="/image/null.png"></image>
     </view>
-    <view class="word_package" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
-      <text class="word" bindtap="show_explain" data-word="{{word}}">{{word}}</text>
-      <i bindtap="delete_word" class="fa fa-close delete" data-word="{{word}}" data-wordidx="{{idx}}"></i>
+    <view class="word_package" bindtap="show_click_explain" data-wordidx="{{idx}}" data-word="{{word}}" wx:key="unique" wx:for="{{word_list}}" wx:for-index="idx" wx:for-item="word">
+      <text class="word">{{word}}</text>
+      <i catchtap="delete_word" class="fa fa-close delete" data-word="{{word}}" data-wordidx="{{idx}}"></i>
     </view>
-    <view class="clear" bindtap="clear_all">
+    <view class="clear" catchtap="clear_all">
       <i class='fa fa-trash'></i>
     </view>
 
@@ -34,15 +34,21 @@
   </scroll-view>
 
   <view class="explain" hidden="{{!is_word_querying}}">
-    <view class="reply" bindtap="close_explain">
+    <view class="detail_icon reply" bindtap="close_explain">
       <i class='fa fa-reply'></i>
     </view>
-    <view class="source" bindtap="go_to_source">
+    <view class="detail_icon source" bindtap="go_to_source">
       原文
+    </view>
+    <view class="detail_icon up {{current_word_index == 0 ? 'active': ''}}" bindtap="show_up_explain">
+      <i class='fa fa-chevron-up'></i>
+    </view>
+    <view class="detail_icon down {{current_word_index == word_list.length-1 ? 'active': ''}}" bindtap="show_next_explain">
+      <i class='fa fa-chevron-down'></i>
     </view>
     <view class="word_title">
       <text class="word_text big_title">{{query_word_result.query}} </text>
-      <text hidden="{{!query_word_result.basic.phonetic}}">[{{query_word_result.basic.phonetic}}]</text>
+      <text class="sound_mark" hidden="{{!query_word_result.basic.phonetic}}">[{{query_word_result.basic.phonetic}}]</text>
       <i class="fa fa-volume-{{volume_type}} sound_icon fa-2x" bindtap="play_word_sound" data-word="{{word}}" data-wordidx="{{idx}}"></i>
     </view>
     <view class="explains">

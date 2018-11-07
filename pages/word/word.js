@@ -81,19 +81,42 @@ Page({
     }
   },
 
-  show_explain: function(e) {
-    this.cur_word = e.currentTarget.dataset.word;
+  show_explain: function() {
+    this.cur_word = this.data.word_list[this.data.current_word_index];
     this.data.word_sound_url = "https://tts.yeshj.com/s/" + this.cur_word;
     var that = this;
     translate.request(this.cur_word, function(res) {
-      console.log(res.data)
       that.data.query_word_result = res.data;
       that.setData({
         is_word_querying: true,
         query_word_result: res.data,
-        word_sound_url: that.data.word_sound_url
+        word_sound_url: that.data.word_sound_url,
+        current_word_index: that.data.current_word_index
       });
     });
+  },
+
+  show_click_explain: function(e) {
+    this.data.current_word_index = e.currentTarget.dataset.wordidx;
+    this.show_explain();
+  },
+
+  show_up_explain: function(e) {
+    this.data.current_word_index -= 1;
+    if (this.data.current_word_index < 0) {
+      this.data.current_word_index = 0;
+      return;
+    }
+    this.show_explain();
+  },
+
+  show_next_explain: function(e) {
+    this.data.current_word_index += 1;
+    if (this.data.current_word_index >= this.data.word_list.length) {
+      this.data.current_word_index = this.data.word_list.length - 1;
+      return;
+    }
+    this.show_explain();
   },
 
   close_explain: function(e) {
