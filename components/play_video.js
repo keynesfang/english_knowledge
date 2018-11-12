@@ -78,7 +78,7 @@ Component({
     set_sentence_view_pos_arr: function(idx) {
       var that = this;
       let id_mark = "#view" + idx;
-      const query = wx.createSelectorQuery().in(this)
+      const query = wx.createSelectorQuery().in(this);
       query.select(id_mark).boundingClientRect(function(res) {
         that.data.sentence_view_pos_arr.push(res.top);
       }).exec()
@@ -171,6 +171,7 @@ Component({
     },
 
     query_eng_word: function(e) {
+      this.getScrollOffset();
       wx.showToast({
         title: '查词中',
         icon: 'success',
@@ -293,6 +294,15 @@ Component({
       wx.navigateTo({
         url: '/pages/word/word'
       });
+    },
+
+    getScrollOffset() {
+      wx.createSelectorQuery().in(this).select("#subtitle-view").scrollOffset(function (res) {
+        console.log(res.id);      // 节点的ID
+        res.dataset // 节点的dataset
+        res.scrollLeft // 节点的水平滚动位置
+        console.log(res.scrollTop);  // 节点的竖直滚动位置
+      }).exec();
     }
   }
 })

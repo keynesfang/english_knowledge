@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/logs/logs",
+    "pages/index/index",
     "pages/word/word",
     "pages/video/video"
   ],
@@ -15,12 +15,14 @@
         "pagePath": "pages/index/index",
         "selectedIconPath": "/image/main_active.png",
         "iconPath": "/image/main.png",
+        "selectedColor": "#1296db",
         "text": "学习"
       },
       {
         "pagePath": "pages/logs/logs",
         "selectedIconPath": "/image/sub_active.png",
         "iconPath": "/image/sub.png",
+        "selectedColor": "#1296db",
         "text": "周边"
       }
     ]
