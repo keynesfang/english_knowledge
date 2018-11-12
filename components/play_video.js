@@ -28,6 +28,16 @@ Component({
     for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
       this.set_sentence_view_pos_arr(i);
     }
+
+    this.data.subtitle_translate_hide = true;
+
+    this.setData({
+      subtitle_translate_hide: this.data.subtitle_translate_hide
+    });
+
+    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+      this.set_sentence_view_pos_arr_chn(i);
+    }
   },
 
   properties: {
@@ -48,11 +58,12 @@ Component({
     view_model: "阅读模式",
     play_status: "pause",
     explain_panel_hidden: true,
-    subtitle_translate_hide: true,
+    subtitle_translate_hide: false,
     explain_title_color: "orange",
     current_index: 0,
     subtitle_scroll_top: 0,
-    sentence_view_pos_arr: []
+    sentence_view_pos_arr: [],
+    sentence_view_pos_arr_chn: []
   },
 
   /**
@@ -80,7 +91,16 @@ Component({
       let id_mark = "#view" + idx;
       const query = wx.createSelectorQuery().in(this);
       query.select(id_mark).boundingClientRect(function(res) {
-        that.data.sentence_view_pos_arr.push(res.top);
+        that.data.sentence_view_pos_arr.push(res.top - 326);
+      }).exec()
+    },
+
+    set_sentence_view_pos_arr_chn: function (idx) {
+      var that = this;
+      let id_mark = "#view" + idx;
+      const query = wx.createSelectorQuery().in(this);
+      query.select(id_mark).boundingClientRect(function (res) {
+        that.data.sentence_view_pos_arr_chn.push(res.top - 326);
       }).exec()
     },
 
@@ -126,7 +146,7 @@ Component({
       });
     },
 
-    next_sentence: function (e) {
+    next_sentence: function(e) {
       this.data.current_index = e.currentTarget.dataset["idx"] + 1;
       this.VideoContext.seek(this.subtitles_file.subtitles[this.data.current_index].start);
       this.VideoContext.play();
@@ -137,7 +157,7 @@ Component({
       });
     },
 
-    prev_sentence: function (e) {
+    prev_sentence: function(e) {
       this.data.current_index = e.currentTarget.dataset["idx"] - 1;
       this.VideoContext.seek(this.subtitles_file.subtitles[this.data.current_index].start);
       this.VideoContext.play();
@@ -297,11 +317,17 @@ Component({
     },
 
     getScrollOffset() {
-      wx.createSelectorQuery().in(this).select("#subtitle-view").scrollOffset(function (res) {
-        console.log(res.id);      // 节点的ID
-        res.dataset // 节点的dataset
-        res.scrollLeft // 节点的水平滚动位置
-        console.log(res.scrollTop);  // 节点的竖直滚动位置
+      var that = this;
+      wx.createSelectorQuery().in(this).select("#subtitle-view").scrollOffset(function(res) {
+        // console.log(res.id);      // 节点的ID
+        // res.dataset // 节点的dataset
+        // res.scrollLeft // 节点的水平滚动位置
+        console.log(res.scrollTop); // 节点的竖直滚动位置
+        console.log(that.data.sentence_view_pos_arr[1]);
+        console.log(that.data.sentence_view_pos_arr_chn[1]);
+        // for (let i = 0; i < that.data.sentence_view_pos_arr.length; i++) {
+        //   console.log(that.data.sentence_view_pos_arr[i]);
+        // }
       }).exec();
     }
   }
