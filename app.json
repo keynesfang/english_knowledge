@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/logs/logs",
+    "pages/functions/functions",
     "pages/index/index",
     "pages/word/word",
+    "pages/logs/logs",
     "pages/video/video"
   ],
   "window": {
@@ -19,7 +20,7 @@
         "text": "学习"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/functions/functions",
         "selectedIconPath": "/image/sub_active.png",
         "iconPath": "/image/sub.png",
         "selectedColor": "#1296db",

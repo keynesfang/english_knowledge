@@ -26,7 +26,7 @@ Component({
     });
 
     for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-      this.set_sentence_view_pos_arr(i);
+      this.set_sentence_view_pos_arr_chn(i);
     }
 
     this.data.subtitle_translate_hide = true;
@@ -36,7 +36,7 @@ Component({
     });
 
     for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-      this.set_sentence_view_pos_arr_chn(i);
+      this.set_sentence_view_pos_arr(i);
     }
   },
 
@@ -91,16 +91,16 @@ Component({
       let id_mark = "#view" + idx;
       const query = wx.createSelectorQuery().in(this);
       query.select(id_mark).boundingClientRect(function(res) {
-        that.data.sentence_view_pos_arr.push(res.top - 326);
+        that.data.sentence_view_pos_arr.push(res.top);
       }).exec()
     },
 
-    set_sentence_view_pos_arr_chn: function (idx) {
+    set_sentence_view_pos_arr_chn: function(idx) {
       var that = this;
       let id_mark = "#view" + idx;
       const query = wx.createSelectorQuery().in(this);
-      query.select(id_mark).boundingClientRect(function (res) {
-        that.data.sentence_view_pos_arr_chn.push(res.top - 326);
+      query.select(id_mark).boundingClientRect(function(res) {
+        that.data.sentence_view_pos_arr_chn.push(res.top);
       }).exec()
     },
 
@@ -191,7 +191,6 @@ Component({
     },
 
     query_eng_word: function(e) {
-      this.getScrollOffset();
       wx.showToast({
         title: '查词中',
         icon: 'success',
@@ -238,14 +237,37 @@ Component({
     },
 
     switch_subtitle_translate: function(e) {
-      if (this.data.subtitle_translate_hide) {
-        this.data.subtitle_translate_hide = false;
-      } else {
-        this.data.subtitle_translate_hide = true;
-      }
-      this.setData({
-        subtitle_translate_hide: this.data.subtitle_translate_hide
-      });
+      var that = this;
+      wx.createSelectorQuery().in(this).select("#subtitle-view").scrollOffset(function(res) {
+        // console.log(res.scrollTop); // 节点的竖直滚动位置
+        var temp_arr_before = [];
+        var temp_arr_after = [];
+        var cur_section_index = 0;
+        if (that.data.subtitle_translate_hide) {
+          temp_arr_before = that.data.sentence_view_pos_arr;
+          temp_arr_after = that.data.sentence_view_pos_arr_chn;
+          that.data.subtitle_translate_hide = false;
+        } else {
+          temp_arr_before = that.data.sentence_view_pos_arr_chn;
+          temp_arr_after = that.data.sentence_view_pos_arr;
+          that.data.subtitle_translate_hide = true;
+        }
+        for (let i = 0; i < temp_arr_before.length; i++) {
+          if (res.scrollTop < temp_arr_before[i + 1] - temp_arr_before[0]) {
+            cur_section_index = i;
+            break;
+          }
+        }
+
+        console.log(cur_section_index);
+
+        var scrollbar_offset_top = temp_arr_after[cur_section_index] - temp_arr_after[0];
+
+        that.setData({
+          subtitle_translate_hide: that.data.subtitle_translate_hide,
+          subtitle_scroll_top: scrollbar_offset_top
+        });
+      }).exec();
     },
 
     word_sound_start: function(e) {
@@ -314,21 +336,6 @@ Component({
       wx.navigateTo({
         url: '/pages/word/word'
       });
-    },
-
-    getScrollOffset() {
-      var that = this;
-      wx.createSelectorQuery().in(this).select("#subtitle-view").scrollOffset(function(res) {
-        // console.log(res.id);      // 节点的ID
-        // res.dataset // 节点的dataset
-        // res.scrollLeft // 节点的水平滚动位置
-        console.log(res.scrollTop); // 节点的竖直滚动位置
-        console.log(that.data.sentence_view_pos_arr[1]);
-        console.log(that.data.sentence_view_pos_arr_chn[1]);
-        // for (let i = 0; i < that.data.sentence_view_pos_arr.length; i++) {
-        //   console.log(that.data.sentence_view_pos_arr[i]);
-        // }
-      }).exec();
     }
   }
 })

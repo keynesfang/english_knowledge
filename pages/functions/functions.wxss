@@ -1,0 +1,47 @@
+/* pages/functions/functions.wxss */
+
+.go_back {
+  position: fixed;
+  top: 32px;
+  left: 10px;
+  z-index: 999;
+  font-size: 16px;
+}
+
+.function {
+  position: relative;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  box-shadow: -2px 0 15px #007bff;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.info-icon {
+  font-size: 20px;
+  position: absolute;
+  right: 20px;
+}
+
+.info-text {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.wx-switch-input {
+  width: 42px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::before {
+  width: 41px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::after {
+  width: 18px !important;
+  height: 18px !important;
+}

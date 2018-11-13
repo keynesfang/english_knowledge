@@ -1,17 +1,41 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
 
     // 登录
+    var that = this;
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      success: function(res) {
+        console.log(res)
+        if (res.code) {
+          //存在code
+          wx.request({
+            url: 'https://iperson.top/wx_login.php',
+            data: {
+              req_type: "login",
+              code: res.code
+            },
+            method: 'POST',
+            header: {
+              "content-type": "application/x-www-form-urlencoded"
+            },
+            success: function(res) {
+              that.globalData.userId = res.data.info
+              console.log(res.data);
+            },
+            fail: function() {
+              console.log('服务器请求失败!');
+            },
+          })
+        } else {
+          console.log('获取用户信息失败!' + res.errMsg)
+        }
       }
-    })
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {

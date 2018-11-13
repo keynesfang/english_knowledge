@@ -1,0 +1,29 @@
+<!--pages/functions/functions.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    </block>
+  </view>
+
+  <view class="web_title">
+    <i class="fa fa-paper-plane"></i> 学习周边
+    <i class="fa fa-rss"></i>
+  </view>
+
+  <view class="function" bindtap="open_word">
+    <i class="fa fa-book info-icon"> </i>
+    <text class="info-text">我的生词表</text>
+  </view>
+
+  <view class="function">
+    <i class="fa fa-weixin info-icon"> </i>
+    <text class="info-text">附近的学习者</text>
+  </view>
+
+  <view class="function" style="margin-top: 0px; border-top: 1px solid #fff;">
+    <switch class="info-icon" bindchange="switch2Change" style="top: 4px; right: 15px;" />
+    <text class="info-text">共享我的位置</text>
+  </view>
+</view>
