@@ -6,6 +6,17 @@
   color: transparent;
 }
 
+.setting {
+  position: fixed;
+  top: 28px;
+  left: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff;
+  z-index: 999;
+  line-height: 35px;
+}
+
 .nav {
   box-sizing: border-box;
   font-size: 14px;

@@ -1,7 +1,6 @@
 <!--pages/functions/functions.wxml-->
 <view class="container">
-  <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
-  <open-data class="userinfo-name" type="userNickName"></open-data>
+  <view class="go_back fa fa-chevron-left" bindtap="go_back"> 返回</view>
 
   <view class="web_title">
     <i class="fa fa-paper-plane"></i> 学习周边
@@ -13,13 +12,13 @@
     <text class="info-text">我的生词表</text>
   </view>
 
-  <view class="function">
+  <view class="function" style="margin-bottom: 0px; border-bottom: 1px solid #fff;">
     <i class="fa fa-weixin info-icon"> </i>
     <text class="info-text">附近的学习者</text>
   </view>
 
-  <view class="function" style="margin-top: 0px; border-top: 1px solid #fff;">
-    <switch class="info-icon" bindchange="switch2Change" style="top: 4px; right: 15px;" />
+  <view class="function" hidden="{{!is_auth_location}}">
+    <switch class="info-icon" checked="{{is_pos_share}}" bindchange="set_share_pos" style="top: 4px; right: 13px;" />
     <text class="info-text">共享我的位置</text>
   </view>
 </view>

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/functions/functions",
     "pages/index/index",
+    "pages/fc_around/fc_around",
+    "pages/functions/functions",
     "pages/word/word",
     "pages/logs/logs",
     "pages/video/video"
@@ -9,23 +10,5 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "selectedIconPath": "/image/main_active.png",
-        "iconPath": "/image/main.png",
-        "selectedColor": "#1296db",
-        "text": "学习"
-      },
-      {
-        "pagePath": "pages/functions/functions",
-        "selectedIconPath": "/image/sub_active.png",
-        "iconPath": "/image/sub.png",
-        "selectedColor": "#1296db",
-        "text": "周边"
-      }
-    ]
   }
 }

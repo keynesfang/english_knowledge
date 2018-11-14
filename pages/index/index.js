@@ -5,8 +5,7 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: {},
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    is_setting_hide: app.globalData.is_setting_hide,
     navData: [{
         text: '时间管理'
       },
@@ -31,14 +30,13 @@ Page({
   },
 
   onLoad: function() {
-  },
-
-  getUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    if (app.globalData.is_setting_hide) {
+      app.updateSettingColor = res => {
+        this.setData({
+          is_setting_hide: app.globalData.is_setting_hide
+        })
+      }
+    }
   },
 
   switchNav(event) {
@@ -56,6 +54,12 @@ Page({
         currentTab: cur
       })
     }
+  },
+
+  open_setting: function(e) {
+    wx.navigateTo({
+      url: '/pages/functions/functions'
+    });
   },
 
   switchTab(event) {

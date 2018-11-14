@@ -22,6 +22,7 @@ App({
       }
     })
   },
+
   userInfoReadyCallback: function() {
     // 登录远程服务器
     var that = this;
@@ -35,31 +36,14 @@ App({
             success(res) {
               that.globalData.userInfo.latitude = res.latitude;
               that.globalData.userInfo.longitude = res.longitude;
-              console.log(that.globalData.userInfo);
-              wx.request({
-                url: 'https://iperson.top/wx_login.php',
-                data: {
-                  req_type: "login",
-                  code: that.globalData.code,
-                  nickName: that.globalData.userInfo.nickName,
-                  avatarUrl: that.globalData.userInfo.avatarUrl,
-                  gender: that.globalData.userInfo.gender,
-                  latitude: res.latitude,
-                  longitude: res.longitude
-                },
-                method: 'POST',
-                header: {
-                  "content-type": "application/x-www-form-urlencoded"
-                },
-                success: function(res) {
-                  that.globalData.openid = res.data.openid;
-                  console.log(that.globalData.openid);
-                },
-                fail: function() {
-                  that.globalData.openid = "_error";
-                  console.log('服务器请求失败!');
-                },
-              })
+              // console.log(that.globalData.userInfo);
+              that.service_login();
+            },
+            fail() {
+              that.globalData.userInfo.latitude = 0;
+              that.globalData.userInfo.longitude = 0;
+              // console.log(that.globalData.userInfo);
+              that.service_login();
             }
           });
         } else {
@@ -70,7 +54,60 @@ App({
     });
   },
 
+  service_login: function() {
+    var that = this;
+    wx.request({
+      url: 'https://iperson.top/wx_login.php',
+      data: {
+        req_type: "login",
+        code: this.globalData.code,
+        nickName: this.globalData.userInfo.nickName,
+        avatarUrl: this.globalData.userInfo.avatarUrl,
+        gender: this.globalData.userInfo.gender,
+        latitude: this.globalData.userInfo.latitude,
+        longitude: this.globalData.userInfo.latitude
+      },
+      method: 'POST',
+      header: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        that.globalData.openid = res.data.openid;
+        that.globalData.is_pos_share = res.data.is_pos_share;
+        that.globalData.is_setting_hide = false;
+        if (that.updateSettingColor) {
+          that.updateSettingColor();
+        }
+        console.log(res);
+      },
+      fail: function() {
+        that.globalData.openid = "_error";
+        console.log('服务器请求失败!');
+      }
+    })
+  },
+
   globalData: {
-    userInfo: null
+    userInfo: null,
+    is_setting_hide: true
   }
 })
+
+// "tabBar": {
+//   "list": [
+//     {
+//       "pagePath": "pages/index/index",
+//       "selectedIconPath": "/image/main_active.png",
+//       "iconPath": "/image/main.png",
+//       "selectedColor": "#1296db",
+//       "text": "学习"
+//     },
+//     {
+//       "pagePath": "pages/functions/functions",
+//       "selectedIconPath": "/image/sub_active.png",
+//       "iconPath": "/image/sub.png",
+//       "selectedColor": "#1296db",
+//       "text": "周边"
+//     }
+//   ]
+// }
