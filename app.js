@@ -1,11 +1,13 @@
 //app.js
 App({
   onLaunch: function() {
+    this.globalData.login_status = "unlogin";
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          this.globalData.login_status = "logining";
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
@@ -74,9 +76,9 @@ App({
       success: function(res) {
         that.globalData.openid = res.data.openid;
         that.globalData.is_pos_share = res.data.is_pos_share;
-        that.globalData.is_setting_hide = false;
-        if (that.updateSettingColor) {
-          that.updateSettingColor();
+        that.globalData.login_status = "logined";
+        if (that.update_login_status) {
+          that.update_login_status();
         }
         console.log(res);
       },
@@ -88,8 +90,7 @@ App({
   },
 
   globalData: {
-    userInfo: null,
-    is_setting_hide: true
+    userInfo: null
   }
 })
 

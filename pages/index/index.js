@@ -5,7 +5,7 @@ const app = getApp()
 
 Page({
   data: {
-    is_setting_hide: app.globalData.is_setting_hide,
+    login_status: app.globalData.login_status,
     navData: [{
         text: '时间管理'
       },
@@ -30,12 +30,52 @@ Page({
   },
 
   onLoad: function() {
-    if (app.globalData.is_setting_hide) {
-      app.updateSettingColor = res => {
+    if (app.globalData.login_status != "logined") {
+      app.update_login_status = res => {
         this.setData({
-          is_setting_hide: app.globalData.is_setting_hide
+          login_status: app.globalData.login_status
         })
       }
+    }
+  },
+
+  login_deal: function(e) {
+    if (app.globalData.login_status == "unlogin") {
+      wx.getSetting({
+        success: (res) => {
+          if (!res.authSetting['scope.userInfo']) {
+            console.log("start");
+            wx.authorize({
+              scope: 'scope.userInfo',
+              success() {
+                app.globalData.login_status = "logining";
+                wx.getUserInfo({
+                  success: res => {
+                    app.globalData.userInfo = res.userInfo
+                    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                    // 所以此处加入 callback 以防止这种情况
+                    if (app.userInfoReadyCallback) {
+                      app.userInfoReadyCallback()
+                    }
+                  },
+                  fail: res => {
+                    console.log("error");
+                    app.globalData.login_status = "unlogin";
+                  }
+                })
+              },
+              fail(res) {
+                console.log("auth fail");
+                console.log(res);
+              }
+            })
+          }
+        }
+      });
+    } else {
+      this.setData({
+        login_status: app.globalData.login_status
+      });
     }
   },
 
