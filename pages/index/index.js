@@ -29,11 +29,16 @@ Page({
     });
   },
 
-  onLoad: function () {
+  onLoad: function() {
     if (app.globalData.login_status != "logined") {
+
+      app.set_login_status = res => {
+        this.setData({
+          login_status: app.globalData.login_status
+        })
+      }
+
       app.update_login_status = res => {
-        console.log(app.globalData.scope);
-        console.log(app.globalData.login_status);
         this.setData({
           login_status: app.globalData.login_status
         })
@@ -41,43 +46,18 @@ Page({
     }
   },
 
-  login_deal: function(e) {
-    var that = this;
-    if (app.globalData.login_status == "unlogin") {
-      wx.openSetting({
-        success: function(data) {
-          console.log(data);
-          if (data.authSetting['scope.userInfo']) {
-            app.globalData.login_status = "logining";
-            that.setData({
-              login_status: app.globalData.login_status
-            });
-            wx.getUserInfo({
-              success: res => {
-                app.globalData.userInfo = res.userInfo
-                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                // 所以此处加入 callback 以防止这种情况
-                if (app.userInfoReadyCallback) {
-                  app.userInfoReadyCallback()
-                }
-              },
-              fail: res => {
-                console.log("error");
-                app.globalData.login_status = "unlogin";
-              }
-            })
-          } else {
-            app.globalData.login_status = "unlogin";
-            that.setData({
-              login_status: app.globalData.login_status
-            });
-          }
-        }
-      });
-    } else {
+  bindGetUserInfo: function(e) {
+    if (e.detail.userInfo) {
+      //用户按了允许授权按钮
+      app.globalData.login_status = "logining";
       this.setData({
         login_status: app.globalData.login_status
       });
+      app.globalData.userInfo = e.detail.userInfo;
+      console.log(app.globalData.userInfo);
+      if (app.userInfoReadyCallback) {
+        app.userInfoReadyCallback()
+      }
     }
   },
 

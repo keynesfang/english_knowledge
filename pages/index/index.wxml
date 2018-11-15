@@ -1,6 +1,6 @@
-<!--index.wxml-->
+<!--index.wxml<button open-type="getUserInfo">asdf</button>-->
 <view class="container">
-  <view class="check_login" bindtap="login_deal" hidden="{{login_status=='logining' || login_status=='logined'}}"><i class="fa fa-user"></i> 未登陆</view>
+<button class="check_login login_btn" bindgetuserinfo="bindGetUserInfo" open-type="getUserInfo" hidden="{{login_status=='logining' || login_status=='logined'}}"><i class="fa fa-user"></i> 登陆</button>
   <view class="check_login" hidden="{{login_status=='unlogin' || login_status=='logined'}}"><i class="fa fa-user"></i> 登陆中</view>
   <open-data class="userinfo-avatar" hidden="{{login_status=='logining' || login_status=='unlogin'}}" type="userAvatarUrl"></open-data>
   <view class="setting" hidden="{{login_status=='logining' || login_status=='unlogin'}}" bindtap="open_setting">设置</view>

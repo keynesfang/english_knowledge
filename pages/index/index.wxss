@@ -28,6 +28,12 @@
   line-height: 35px;
 }
 
+.login_btn {
+  background-color: #007bff;
+  color: #fff;
+  line-height: 30px;
+}
+
 .nav {
   box-sizing: border-box;
   font-size: 14px;
