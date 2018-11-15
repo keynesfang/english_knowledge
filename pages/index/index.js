@@ -29,9 +29,11 @@ Page({
     });
   },
 
-  onLoad: function() {
+  onLoad: function () {
     if (app.globalData.login_status != "logined") {
       app.update_login_status = res => {
+        console.log(app.globalData.scope);
+        console.log(app.globalData.login_status);
         this.setData({
           login_status: app.globalData.login_status
         })
@@ -40,35 +42,35 @@ Page({
   },
 
   login_deal: function(e) {
+    var that = this;
     if (app.globalData.login_status == "unlogin") {
-      wx.getSetting({
-        success: (res) => {
-          if (!res.authSetting['scope.userInfo']) {
-            console.log("start");
-            wx.authorize({
-              scope: 'scope.userInfo',
-              success() {
-                app.globalData.login_status = "logining";
-                wx.getUserInfo({
-                  success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                    // 所以此处加入 callback 以防止这种情况
-                    if (app.userInfoReadyCallback) {
-                      app.userInfoReadyCallback()
-                    }
-                  },
-                  fail: res => {
-                    console.log("error");
-                    app.globalData.login_status = "unlogin";
-                  }
-                })
+      wx.openSetting({
+        success: function(data) {
+          console.log(data);
+          if (data.authSetting['scope.userInfo']) {
+            app.globalData.login_status = "logining";
+            that.setData({
+              login_status: app.globalData.login_status
+            });
+            wx.getUserInfo({
+              success: res => {
+                app.globalData.userInfo = res.userInfo
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                if (app.userInfoReadyCallback) {
+                  app.userInfoReadyCallback()
+                }
               },
-              fail(res) {
-                console.log("auth fail");
-                console.log(res);
+              fail: res => {
+                console.log("error");
+                app.globalData.login_status = "unlogin";
               }
             })
+          } else {
+            app.globalData.login_status = "unlogin";
+            that.setData({
+              login_status: app.globalData.login_status
+            });
           }
         }
       });
