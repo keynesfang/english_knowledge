@@ -31,6 +31,15 @@
   font-weight: bold;
 }
 
+.auth_btn {
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: #fff;
+  line-height: 30px;
+}
+
 .wx-switch-input {
   width: 42px !important;
   height: 20px !important;

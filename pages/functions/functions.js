@@ -33,7 +33,19 @@ Page({
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady: function() {
+  open_setting: function () {
+    var that = this;
+    wx.openSetting({
+      success: (res) => {
+        if (res.authSetting["scope.userLocation"]) {
+          console.log(res.authSetting);
+          that.data.is_pos_share = true;
+          that.setData({
+            is_pos_share: that.data.is_pos_share
+          })
+        }
+      }
+    })
   },
 
   set_share_pos: function(e) {

@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/fc_around/fc_around",
     "pages/functions/functions",
+    "pages/fc_around/fc_around",
     "pages/word/word",
     "pages/logs/logs",
     "pages/video/video"

@@ -17,8 +17,10 @@
     <text class="info-text">附近的学习者</text>
   </view>
 
-  <view class="function" hidden="{{!is_auth_location}}">
-    <switch class="info-icon" checked="{{is_pos_share}}" bindchange="set_share_pos" style="top: 4px; right: 13px;" />
+  <view class="function">
+    <button hidden="{{is_auth_location}}"  class="info-icon auth_btn" bindtap="open_setting">
+      <i class="fa fa-user"></i> 定位授权</button>
+    <switch hidden="{{!is_auth_location}}" class="info-icon" checked="{{is_pos_share}}" bindchange="set_share_pos" style="top: 4px; right: 13px;" />
     <text class="info-text">共享我的位置</text>
   </view>
 </view>
