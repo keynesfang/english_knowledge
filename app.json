@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/logs/logs",
     "pages/index/index",
     "pages/functions/functions",
     "pages/fc_around/fc_around",
     "pages/word/word",
-    "pages/logs/logs",
     "pages/video/video"
   ],
   "window": {

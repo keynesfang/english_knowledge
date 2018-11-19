@@ -25,7 +25,7 @@
       <image data-idx="{{idx1}}" bindtap="play_forward" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/forw.png" hidden="{{view_model == '视频模式' || current_index != idx1}}"></image>
       <image data-idx="{{idx1}}" bindtap="prev_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/prev.png" hidden="{{view_model == '视频模式' || current_index != idx1 || current_index == 0}}"></image>
       <image data-idx="{{idx1}}" bindtap="next_sentence" class="sentence_play {{current_index == idx1 ?'active':''}}" src="/image/next.png" hidden="{{view_model == '视频模式' || current_index != idx1 || current_index == subtitle_end_index}}"></image>
-      
+
       <view class="current_time"> {{subtitle_content[idx1].time}}</view>
     </view>
     <view class="sentence_txt_eng {{current_index == idx1 || play_status == 'pause' ?'active':''}}">
@@ -38,20 +38,20 @@
 </scroll-view>
 
 <view class="explain_panel" hidden="{{explain_panel_hidden}}">
-  <image class="explain_close" src="/image/close.png" bindtap="close_panel"></image>
-  <image data-word="{{query_word_result.query}}" class="word_add" src="/image/plus.png" bindtap='add_word'></image>
+  <image class="explain_close icon_bar" src="/image/close.png" bindtap="close_panel"></image>
+  <image data-word="{{query_word_result.query}}" class="word_add icon_bar" src="/image/plus.png" bindtap='add_word'></image>
+  <image style="" class="word_sound icon_bar" src="/image/sound.png" bindtap='play_word_sound'></image>
   <view class="explain_title_bar" style="color: {{explain_title_color}};">
     <view class="word_title">
       <text class="word_text">{{query_word_result.query}} </text>
       <text class="word_text" hidden="{{!query_word_result.basic.phonetic}}">[{{query_word_result.basic.phonetic}}]</text>
-      <image style="" class="word_sound" src="/image/sound.png" bindtap='play_word_sound'></image>
     </view>
   </view>
   <view class="all_explain">
     <view class="word_explain" wx:key="unique" wx:for="{{query_word_result.basic.explains}}" wx:for-index="idx" wx:for-item="note">
       {{note}}
     </view>
-    <image class="word_book" src="/image/book.png" bindtap='open_word_book'></image>
+    <image class="word_book icon_bar" src="/image/book.png" bindtap='open_word_book'></image>
   </view>
 </view>
 

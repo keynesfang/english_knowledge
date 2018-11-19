@@ -131,36 +131,42 @@ video {
   box-sizing: border-box;
 }
 
-.explain_close {
-  width: 20px;
-  height: 20px;
-  float: right;
+.icon_bar {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -30px;
 }
 
-.word_sound {
-  width: 25px;
-  height: 25px;
-  margin-left: 5px;
+.explain_close {
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  right: 5px;
 }
 
 .word_add {
-  width: 25px;
-  height: 25px;
-  float: left;
-  margin-right: 5px;
+  left: 0;
+}
+
+.word_sound {
+  width: 35px;
+  height: 35px;
+  left: 45px;
+  top: -26px;
 }
 
 .word_book {
-  width: 25px;
-  height: 25px;
-  float: right;
-  margin-top: 10px;
+  top: -26px;
+  width: 35px;
+  height: 35px;
+  left: 90px;
 }
 
 .word_title {
   position: absolute;
-  top: 3px;
-  left: 45px;
+  top: 10px;
+  left: 15px;
 }
 
 .word_text {
