@@ -14,7 +14,7 @@
     </view>
   </view>
   <!--视频-->
-  <video custom-cache="{{true}}" hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_url}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" style='height: {{video_height}}px;' bindtimeupdate="video_listen" bindplay="video_play_event"
+  <video hidden="{{view_model == '视频模式'}}" id="current_video" src="{{video_url}}" show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" style='height: {{video_height}}px;' bindtimeupdate="video_listen" bindplay="video_play_event"
     bindpause="video_pause_event"></video>
 </view>
 <scroll-view id="subtitle-view" scroll-top="{{subtitle_scroll_top}}" scroll-height-animation="{{true}}" scroll-y class='subtitle_wrapper' style="height: {{subtitles_height}}px;">

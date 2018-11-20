@@ -5,41 +5,6 @@ var translate = require("../resource/translate.js");
 Component({
   last_play_time: 0,
 
-  ready: function() {
-    this.subtitles_file = require("../resource/" + this.properties.videoSrc + ".js");
-    this.VideoContext = wx.createVideoContext("current_video", this);
-    this.audioCtx = wx.createAudioContext("word_sound", this);
-    this.video_height = wx.getSystemInfoSync().windowWidth / 16 * 9;
-    this.subtitles_height = wx.getSystemInfoSync().windowHeight - 76 - 30 - this.video_height;
-    this.subtitle_eng_content = [];
-    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-      this.subtitle_eng_content.push(this.subtitles_file.subtitles[i].eng.split(" "));
-    }
-    this.data.video_url = "https://iperson.top/function/english/video/ted/" + this.properties.videoSrc + ".mp4";
-    this.setData({
-      video_height: this.video_height,
-      subtitles_height: this.subtitles_height,
-      subtitle_content: this.subtitles_file.subtitles,
-      subtitle_eng_content: this.subtitle_eng_content,
-      video_url: this.data.video_url,
-      subtitle_end_index: this.subtitle_eng_content.length - 1
-    });
-
-    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-      this.set_sentence_view_pos_arr_chn(i);
-    }
-
-    this.data.subtitle_translate_hide = true;
-
-    this.setData({
-      subtitle_translate_hide: this.data.subtitle_translate_hide
-    });
-
-    for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-      this.set_sentence_view_pos_arr(i);
-    }
-  },
-
   properties: {
     videoTitle: {
       type: String,
@@ -47,7 +12,47 @@ Component({
     },
     videoSrc: {
       type: String,
-      value: ""
+      value: "",
+      observer: function (newVal, oldVal, changedPath) {
+        this.setData({
+          video_url: "https://iperson.top/function/english/video/ted/" + newVal + ".mp4"
+        });
+      }
+    }
+  },
+
+  lifetimes: {
+    ready: function() {
+      this.subtitles_file = require("../resource/" + this.properties.videoSrc + ".js");
+      this.VideoContext = wx.createVideoContext("current_video", this);
+      this.audioCtx = wx.createAudioContext("word_sound", this);
+      this.video_height = wx.getSystemInfoSync().windowWidth / 16 * 9;
+      this.subtitles_height = wx.getSystemInfoSync().windowHeight - 76 - 30 - this.video_height;
+      this.subtitle_eng_content = [];
+      for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+        this.subtitle_eng_content.push(this.subtitles_file.subtitles[i].eng.split(" "));
+      }
+      this.setData({
+        video_height: this.video_height,
+        subtitles_height: this.subtitles_height,
+        subtitle_content: this.subtitles_file.subtitles,
+        subtitle_eng_content: this.subtitle_eng_content,
+        subtitle_end_index: this.subtitle_eng_content.length - 1
+      });
+
+      for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+        this.set_sentence_view_pos_arr_chn(i);
+      }
+
+      this.data.subtitle_translate_hide = true;
+
+      this.setData({
+        subtitle_translate_hide: this.data.subtitle_translate_hide
+      });
+
+      for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
+        this.set_sentence_view_pos_arr(i);
+      }
     }
   },
 

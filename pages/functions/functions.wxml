@@ -24,3 +24,5 @@
     <text class="info-text">共享我的位置</text>
   </view>
 </view>
+
+<video custom-cache="{{true}}" id="current_video" src="https://iperson.top/function/english/video/ted/3_rules_to_spark_learning.mp4"></video>
