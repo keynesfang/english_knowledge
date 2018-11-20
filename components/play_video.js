@@ -59,11 +59,12 @@ Component({
     play_status: "pause",
     explain_panel_hidden: true,
     subtitle_translate_hide: false,
-    explain_title_color: "orange",
+    explain_title_color: "#ffc107",
     current_index: 0,
     subtitle_scroll_top: 0,
     sentence_view_pos_arr: [],
-    sentence_view_pos_arr_chn: []
+    sentence_view_pos_arr_chn: [],
+    combine: "combine"
   },
 
   /**
@@ -84,6 +85,17 @@ Component({
         play_status: this.data.play_status,
         subtitles_height: temp_subtitles_height
       });
+    },
+
+    set_combine_mode: function(e) {
+      if (this.data.combine == "combine_on") {
+        this.data.combine = "combine";
+      } else {
+        this.data.combine = "combine_on";
+      }
+      this.setData({
+        combine: this.data.combine
+      })
     },
 
     set_sentence_view_pos_arr: function(idx) {
@@ -190,6 +202,16 @@ Component({
       }
     },
 
+    record_input_word: function(e) {
+      this.setData({
+        query_word: e.detail.value
+      })
+    },
+
+    query_input_word: function(e) {
+      this.query_word_from_web();
+    },
+
     query_eng_word: function(e) {
       wx.showToast({
         title: '查词中',
@@ -202,7 +224,17 @@ Component({
       var idx2 = e.currentTarget.dataset.idxy;
       this.data.select_word_pos = [idx1, idx2];
       var query_original_word = e.currentTarget.dataset.word; // 该变量为原查询单词（包括符号，如：abc. a's等）
-      this.data.query_word = this.get_char_from_string(query_original_word);
+      var temp_word = " " + this.get_char_from_string(query_original_word);;
+      if (this.data.query_word && this.data.combine == "combine_on") {
+        this.data.query_word += temp_word;
+      } else {
+        this.data.query_word = temp_word;
+      }
+
+      this.query_word_from_web();
+    },
+
+    query_word_from_web: function() {
       this.data.word_sound_url = "https://tts.yeshj.com/s/" + this.data.query_word;
       var that = this;
       translate.request(this.data.query_word, function(res) {
@@ -278,7 +310,7 @@ Component({
     },
 
     word_sound_end: function(e) {
-      this.data.explain_title_color = "orange";
+      this.data.explain_title_color = "#ffc107";
       this.setData({
         explain_title_color: this.data.explain_title_color
       });

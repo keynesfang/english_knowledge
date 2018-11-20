@@ -129,13 +129,13 @@ video {
   width: 100vw;
   padding: 10px;
   box-sizing: border-box;
+  border-bottom: 5px solid #17a2b8;
 }
 
 .icon_bar {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: -30px;
 }
 
 .explain_close {
@@ -146,6 +146,7 @@ video {
 }
 
 .word_add {
+  top: -20px;
   left: 0;
 }
 
@@ -153,33 +154,56 @@ video {
   width: 35px;
   height: 35px;
   left: 45px;
-  top: -26px;
+  top: -16px;
 }
 
 .word_book {
-  top: -26px;
+  top: -16px;
   width: 35px;
   height: 35px;
-  left: 90px;
+  left: 88px;
+}
+
+.word_combine {
+  top: -16px;
+  width: 35px;
+  height: 35px;
+  left: 128px;
+}
+
+.word_query {
+  top: -16px;
+  width: 35px;
+  height: 35px;
+  left: 168px;
 }
 
 .word_title {
   position: absolute;
-  top: 10px;
-  left: 15px;
+  top: 20px;
+  left: 12px;
+  margin-bottom: 10px;
+}
+
+.word_input {
+  position: absolute;
+  bottom: 5px;
+  color: #ffc107;
+  width: 100%;
 }
 
 .word_text {
   font-size: 15px;
+  margin-right: 5px;
 }
 
 .all_explain {
-  margin-top: 25px;
+  margin: 35px 0 28px 0;
 }
 
 .word_explain {
   margin-top: 5px;
-  margin-left: 10px;
+  margin-left: 3px;
   font-size: 14px;
   display: inline-block;
 }

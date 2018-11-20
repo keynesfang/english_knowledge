@@ -41,10 +41,13 @@
   <image class="explain_close icon_bar" src="/image/close.png" bindtap="close_panel"></image>
   <image data-word="{{query_word_result.query}}" class="word_add icon_bar" src="/image/plus.png" bindtap='add_word'></image>
   <image style="" class="word_sound icon_bar" src="/image/sound.png" bindtap='play_word_sound'></image>
-  <view class="explain_title_bar" style="color: {{explain_title_color}};">
-    <view class="word_title">
-      <text class="word_text">{{query_word_result.query}} </text>
-      <text class="word_text" hidden="{{!query_word_result.basic.phonetic}}">[{{query_word_result.basic.phonetic}}]</text>
+  <image style="" bindtap="set_combine_mode" class="word_combine icon_bar" src="/image/{{combine}}.png"></image>
+  <image style="" bindtap="query_input_word" class="word_query icon_bar" src="/image/query2.png"></image>
+  <input class="word_input" bindinput="record_input_word" value="{{query_word_result.query}}"></input>
+  <view class="explain_title_bar">
+    <view class="word_title" style="color: {{explain_title_color}};">
+      <text class="word_text" hidden="{{!query_word_result.basic['us-phonetic']}}">美: [{{query_word_result.basic['us-phonetic']}}]</text>
+      <text class="word_text" hidden="{{!query_word_result.basic['uk-phonetic']}}">英: [{{query_word_result.basic['uk-phonetic']}}]</text>
     </view>
   </view>
   <view class="all_explain">
