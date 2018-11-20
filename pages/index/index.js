@@ -7,7 +7,7 @@ Page({
   data: {
     login_status: app.globalData.login_status,
     navData: [{
-        text: '时间管理'
+      text: '工作生活'
       },
       {
         text: '高端知识'
@@ -54,7 +54,7 @@ Page({
         login_status: app.globalData.login_status
       });
       app.globalData.userInfo = e.detail.userInfo;
-      console.log(app.globalData.userInfo);
+      // console.log(app.globalData.userInfo);
       if (app.userInfoReadyCallback) {
         app.userInfoReadyCallback()
       }

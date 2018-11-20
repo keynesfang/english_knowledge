@@ -53,7 +53,7 @@ App({
           });
         } else {
           that.globalData.openid = "_error";
-          console.log('获取用户信息失败!' + res.errMsg)
+          // console.log('获取用户信息失败!' + res.errMsg)
         }
       }
     });
@@ -83,11 +83,11 @@ App({
         if (that.update_login_status) {
           that.update_login_status();
         }
-        console.log(res);
+        // console.log(res);
       },
       fail: function() {
         that.globalData.openid = "_error";
-        console.log('服务器请求失败!');
+        // console.log('服务器请求失败!');
       }
     })
   },
