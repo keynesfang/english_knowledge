@@ -40,19 +40,11 @@ Component({
         subtitle_end_index: this.subtitle_eng_content.length - 1
       });
 
-      for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-        this.set_sentence_view_pos_arr_chn(i);
-      }
-
       this.data.subtitle_translate_hide = true;
 
       this.setData({
         subtitle_translate_hide: this.data.subtitle_translate_hide
       });
-
-      for (let i = 0; i < this.subtitles_file.subtitles.length; i++) {
-        this.set_sentence_view_pos_arr(i);
-      }
     }
   },
 
@@ -67,8 +59,6 @@ Component({
     explain_title_color: "#ffc107",
     current_index: 0,
     subtitle_scroll_top: 0,
-    sentence_view_pos_arr: [],
-    sentence_view_pos_arr_chn: [],
     combine: "combine"
   },
 
@@ -103,24 +93,6 @@ Component({
       })
     },
 
-    set_sentence_view_pos_arr: function(idx) {
-      var that = this;
-      let id_mark = "#view" + idx;
-      const query = wx.createSelectorQuery().in(this);
-      query.select(id_mark).boundingClientRect(function(res) {
-        that.data.sentence_view_pos_arr.push(res.top);
-      }).exec()
-    },
-
-    set_sentence_view_pos_arr_chn: function(idx) {
-      var that = this;
-      let id_mark = "#view" + idx;
-      const query = wx.createSelectorQuery().in(this);
-      query.select(id_mark).boundingClientRect(function(res) {
-        that.data.sentence_view_pos_arr_chn.push(res.top);
-      }).exec()
-    },
-
     video_play_event: function(e) {
       this.data.play_status = "play";
       this.setData({
@@ -131,10 +103,8 @@ Component({
 
     video_pause_event: function(e) {
       this.data.play_status = "pause";
-      let current_sentence_scroll_height = this.data.sentence_view_pos_arr[this.data.current_index] - this.data.sentence_view_pos_arr[0];
       this.setData({
-        play_status: this.data.play_status,
-        subtitle_scroll_top: current_sentence_scroll_height
+        play_status: this.data.play_status
       });
     },
 
@@ -281,12 +251,8 @@ Component({
         var temp_arr_after = [];
         var cur_section_index = 0;
         if (that.data.subtitle_translate_hide) {
-          temp_arr_before = that.data.sentence_view_pos_arr;
-          temp_arr_after = that.data.sentence_view_pos_arr_chn;
           that.data.subtitle_translate_hide = false;
         } else {
-          temp_arr_before = that.data.sentence_view_pos_arr_chn;
-          temp_arr_after = that.data.sentence_view_pos_arr;
           that.data.subtitle_translate_hide = true;
         }
         for (let i = 0; i < temp_arr_before.length; i++) {

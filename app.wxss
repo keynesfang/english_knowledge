@@ -16,7 +16,7 @@ page {
   width: 25px;
   height: 25px;
   position: fixed;
-  top: 28px;
+  top: 30px;
   left: 10px;
   z-index: 999;
 }

@@ -36,21 +36,22 @@ App({
         if (res.code) {
           //存在code
           that.globalData.code = res.code;
-          wx.getLocation({
-            type: 'wgs84',
-            success(res) {
-              that.globalData.userInfo.latitude = res.latitude;
-              that.globalData.userInfo.longitude = res.longitude;
-              // console.log(that.globalData.userInfo);
-              that.service_login();
-            },
-            fail() {
-              that.globalData.userInfo.latitude = 0;
-              that.globalData.userInfo.longitude = 0;
-              // console.log(that.globalData.userInfo);
-              that.service_login();
-            }
-          });
+          that.service_login();
+          // wx.getLocation({
+          //   type: 'wgs84',
+          //   success(res) {
+          //     that.globalData.userInfo.latitude = res.latitude;
+          //     that.globalData.userInfo.longitude = res.longitude;
+          //     // console.log(that.globalData.userInfo);
+          //     that.service_login();
+          //   },
+          //   fail() {
+          //     that.globalData.userInfo.latitude = 0;
+          //     that.globalData.userInfo.longitude = 0;
+          //     // console.log(that.globalData.userInfo);
+          //     that.service_login();
+          //   }
+          // });
         } else {
           that.globalData.openid = "_error";
           // console.log('获取用户信息失败!' + res.errMsg)
@@ -69,8 +70,8 @@ App({
         nickName: this.globalData.userInfo.nickName,
         avatarUrl: this.globalData.userInfo.avatarUrl,
         gender: this.globalData.userInfo.gender,
-        latitude: this.globalData.userInfo.latitude,
-        longitude: this.globalData.userInfo.latitude
+        // latitude: this.globalData.userInfo.latitude,
+        // longitude: this.globalData.userInfo.latitude
       },
       method: 'POST',
       header: {
