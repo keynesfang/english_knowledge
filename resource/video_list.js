@@ -11,7 +11,7 @@ var videos = {
     { "index": "1", "title": "激发学习的3条规则", "name": "3 rules to spark learning", "time": "06:29", "file": "3_rules_to_spark_learning" },
     { "index": "2", "title": "从黑帮女儿到明星老师", "name": "From gangland daughter to star teacher", "time": "07:58", "file": "From_gangland_daughter_to_star_teacher" },
     { "index": "3", "title": "教师需要真实的反馈", "name": "Teachers need real feedback", "time": "10:18", "file": "Teachers_need_real_feedback" },
-    { "index": "4", "title": "激情和毅力的力量", "name": "The power of passion and perseverance", "time": "06:08", "file": "The_power_of_passion_and_perseverance" }
+    { "index": "4", "title": "激情和毅力的力量", "name": "The power of passion and perseverance", "time": "06:08", "file": "The_power_of_passion_and_perseverance" },
     { "index": "5", "title": "高中训练场", "name": "High School Training Ground", "time": "02:55", "file": "High_School_Training_Ground" }
   ]
 };
